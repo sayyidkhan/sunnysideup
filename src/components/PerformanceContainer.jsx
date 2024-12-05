@@ -8,7 +8,7 @@ export function PerformanceContainer() {
       {/* Desktop View */}
       <div className="fixed top-32 right-12 z-[999] hidden md:flex md:flex-col gap-4">
         <PerformanceCards />
-        <div className="bg-[linear-gradient(135deg,rgba(80,119,195,0.45)_0%,rgba(80,119,195,0.35)_100%)] backdrop-blur-[30px] rounded-[20px] border border-white/[0.18] shadow-[0_8px_32px_0_rgba(80,119,195,0.15),inset_0_0_0_1px_rgba(255,255,255,0.25)]">
+        <div className="w-full bg-[linear-gradient(135deg,rgba(80,119,195,0.45)_0%,rgba(80,119,195,0.35)_100%)] backdrop-blur-[30px] rounded-[20px] border border-white/[0.18] shadow-[0_8px_32px_0_rgba(80,119,195,0.15),inset_0_0_0_1px_rgba(255,255,255,0.25)] px-2">
           <PerformanceChart />
         </div>
       </div>

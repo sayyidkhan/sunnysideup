@@ -16,9 +16,9 @@ export function PerformanceChart() {
     <div className="w-full h-[350px] md:h-[400px]">
       <h2 className="text-2xl md:text-3xl font-semibold mt-2 mb-4 text-center text-white">Daily Power Generation</h2>
       <div className="w-full h-full flex justify-center">
-        <div className="w-[85%] h-full">
+        <div className="w-full md:w-full h-full">
           <ResponsiveContainer width="100%" height="85%">
-            <LineChart data={data} margin={{ top: 10, right: -28, left: -28, bottom: 10 }}>
+            <LineChart data={data} margin={{ top: 10, right: 30, left: 0, bottom: 10 }}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis 
                 dataKey="time" 
