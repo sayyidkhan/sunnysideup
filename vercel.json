@@ -4,27 +4,9 @@
   "outputDirectory": "dist",
   "installCommand": "npm install",
   "routes": [
-    { 
-      "handle": "filesystem"
-    },
-    {
-      "src": "/assets/(.*)",
-      "dest": "/assets/$1"
-    },
-    {
-      "src": "/(.+\\.[a-zA-Z]+)$",
-      "dest": "/$1"
-    },
     {
       "src": "/(.*)",
-      "dest": "/index.html",
-      "continue": true
-    }
-  ],
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/node"
+      "dest": "/index.html"
     }
   ]
 }
