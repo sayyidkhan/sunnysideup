@@ -3,6 +3,7 @@ import { Input, Button } from "@nextui-org/react";
 import { SearchIcon } from './SearchIcon';
 import { MAP_CONFIG } from '../constants/data';
 import { useState } from 'react';
+import { PerformanceCards } from './PerformanceCards';
 
 function MapZoomControl() {
   const map = useMap();
@@ -155,6 +156,7 @@ function MyMap() {
           </Popup>
         </Marker>
       </MapContainer>
+      <PerformanceCards />
       <div className="mobile-icons">
         <RightSideIcons />
       </div>
