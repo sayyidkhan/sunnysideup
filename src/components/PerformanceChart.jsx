@@ -13,7 +13,7 @@ const data = [
 
 export function PerformanceChart() {
   return (
-    <div className="w-full h-[350px] md:h-[400px]">
+    <div className="w-full h-[200px] md:h-[400px]">
       <h2 className="text-2xl md:text-3xl font-semibold mt-2 mb-4 text-center text-white">Daily Power Generation</h2>
       <div className="w-full h-full flex justify-center">
         <div className="w-full md:w-full h-full">
