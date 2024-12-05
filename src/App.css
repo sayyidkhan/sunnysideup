@@ -53,3 +53,270 @@
 .read-the-docs {
   color: #888;
 }
+
+/* Desktop icons styling */
+.desktop-icons {
+  display: flex;
+  gap: 8px;
+}
+
+.desktop-icons .right-side-icons {
+  position: static;
+  display: flex;
+  gap: 8px;
+}
+
+/* Mobile icons styling */
+.mobile-icons {
+  display: none;
+}
+
+.mobile-icons .right-side-icons {
+  position: fixed;
+  bottom: 20px;
+  right: 10px;
+  z-index: 9999;
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: linear-gradient(
+    135deg,
+    rgba(80, 119, 195, 0.65) 0%,
+    rgba(80, 119, 195, 0.55) 100%
+  );
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  box-shadow: 
+    0 8px 32px 0 rgba(80, 119, 195, 0.15),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.15);
+  border-radius: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.mobile-icons button {
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white !important;
+  transition: all 0.3s ease;
+}
+
+.mobile-icons button:hover {
+  background: rgba(255, 255, 255, 0.2) !important;
+  transform: translateY(-1px);
+}
+
+.mobile-icons button svg {
+  color: white !important;
+}
+
+.mobile-icons button:hover svg {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+@media (max-width: 768px) {
+  .desktop-icons {
+    display: none;
+  }
+  
+  .mobile-icons {
+    display: block;
+  }
+}
+
+/* Reusable glass morphism effect */
+.glass-morphism {
+  background: linear-gradient(
+    135deg,
+    rgba(80, 119, 195, 0.65) 0%,
+    rgba(80, 119, 195, 0.55) 100%
+  );
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  box-shadow: 
+    0 8px 32px 0 rgba(80, 119, 195, 0.15),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: all 0.3s ease;
+}
+
+.glass-morphism:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(80, 119, 195, 0.7) 0%,
+    rgba(80, 119, 195, 0.6) 100%
+  );
+  box-shadow: 
+    0 8px 32px 0 rgba(80, 119, 195, 0.2),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+}
+
+.glass-morphism input,
+.glass-morphism .input-wrapper {
+  background: rgba(80, 119, 195, 0.2) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+}
+
+.glass-morphism input:hover,
+.glass-morphism input:focus,
+.glass-morphism .input-wrapper:hover,
+.glass-morphism .input-wrapper:focus-within {
+  background: rgba(80, 119, 195, 0.3) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Search Controls Container */
+.search-controls-container {
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  width: 100%;
+  max-width: 56rem;
+  padding: 0.5rem 1rem;
+  background: linear-gradient(
+    135deg,
+    rgba(80, 119, 195, 0.65) 0%,
+    rgba(80, 119, 195, 0.55) 100%
+  );
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  box-shadow: 
+    0 8px 32px 0 rgba(80, 119, 195, 0.15),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.15);
+  border-radius: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: all 0.3s ease;
+}
+
+.search-controls-container:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(80, 119, 195, 0.7) 0%,
+    rgba(80, 119, 195, 0.6) 100%
+  );
+  box-shadow: 
+    0 8px 32px 0 rgba(80, 119, 195, 0.2),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+}
+
+.search-controls-container .input-wrapper {
+  background: rgba(80, 119, 195, 0.2) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+}
+
+.search-controls-container .input-wrapper:hover,
+.search-controls-container .input-wrapper:focus-within {
+  background: rgba(80, 119, 195, 0.3) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.search-controls-container button {
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white !important;
+  transition: all 0.3s ease;
+}
+
+.search-controls-container button:hover {
+  background: rgba(255, 255, 255, 0.2) !important;
+  transform: translateY(-1px);
+}
+
+.search-controls-container button svg {
+  color: white !important;
+}
+
+.search-controls-container button:hover svg {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.search-controls-container input {
+  color: white !important;
+}
+
+.search-controls-container input::placeholder {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.search-inner.glass-morphism {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 1rem;
+}
+
+/* Zoom controls */
+.search-inner .flex.gap-1 {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Search input styling */
+.search-inner .input-wrapper {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.search-inner input {
+  color: white !important;
+  font-size: 1rem !important;
+  padding: 0.5rem 1rem !important;
+}
+
+.search-inner input::placeholder {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Right side icons */
+.search-inner .desktop-icons {
+  display: flex;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
+/* Button styling */
+.search-inner button {
+  width: 2.5rem !important;
+  height: 2.5rem !important;
+  min-width: 2.5rem !important;
+  border-radius: 50% !important;
+  padding: 0 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white !important;
+}
+
+.search-inner button:hover {
+  background: rgba(255, 255, 255, 0.2) !important;
+  transform: translateY(-1px);
+}
+
+.search-inner button svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+/* Icon colors */
+.mobile-icons button svg {
+  color: white !important;
+}
+
+.mobile-icons button:hover svg {
+  color: rgba(255, 255, 255, 0.8) !important;
+}

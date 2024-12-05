@@ -37,7 +37,7 @@ function MapZoomControl() {
 
 function RightSideIcons() {
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-2 right-side-icons">
       <Button
         isIconOnly
         radius="full"
@@ -77,7 +77,7 @@ function RightSideIcons() {
   );
 }
 
-function SearchAndZoomControls() {
+function SearchBarAndZoomControls() {
   const [searchQuery, setSearchQuery] = useState("");
   const map = useMap();
 
@@ -94,18 +94,18 @@ function SearchAndZoomControls() {
 
   return (
     <div 
-      className="absolute top-4 left-1/2 -translate-x-1/2 z-[9999] w-full max-w-4xl px-4"
+      className="absolute top-4 left-1/2 -translate-x-1/2 z-[9999] w-full max-w-4xl px-2 sm:px-4"
       style={{ position: 'fixed' }}
     >
-      <div className="flex gap-2 items-center bg-white/90 backdrop-blur-xl shadow-xl rounded-full p-1">
+      <div className="search-controls-container flex flex-nowrap gap-1 sm:gap-2 items-center rounded-full py-2 px-3">
         <MapZoomControl />
         <Input
           value={searchQuery}
           onValueChange={setSearchQuery}
           classNames={{
-            base: "flex-1",
-            inputWrapper: "bg-transparent shadow-none hover:!bg-transparent",
-            input: "text-base"
+            base: "flex-1 min-w-0",
+            inputWrapper: "bg-transparent shadow-none hover:!bg-transparent h-11",
+            input: "text-base px-4"
           }}
           radius="full"
           placeholder="Search"
@@ -127,7 +127,9 @@ function SearchAndZoomControls() {
           }}
           variant="bordered"
         />
-        <RightSideIcons />
+        <div className="desktop-icons">
+          <RightSideIcons />
+        </div>
       </div>
     </div>
   );
@@ -143,7 +145,7 @@ function MyMap() {
         attributionControl={false}
         zoomControl={false}
       >
-        <SearchAndZoomControls />
+        <SearchBarAndZoomControls />
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
@@ -153,6 +155,9 @@ function MyMap() {
           </Popup>
         </Marker>
       </MapContainer>
+      <div className="mobile-icons">
+        <RightSideIcons />
+      </div>
     </div>
   );
 }
