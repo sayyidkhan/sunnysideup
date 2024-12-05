@@ -14,12 +14,15 @@ export default defineConfig({
           if (id.includes('node_modules')) {
             return 'vendor'
           }
-        }
+        },
+        assetFileNames: 'assets/[name].[hash][extname]',
+        chunkFileNames: 'assets/[name].[hash].js',
+        entryFileNames: 'assets/[name].[hash].js'
       }
     }
   },
   server: {
     port: 3000
   },
-  base: '/'
+  base: './'
 })
