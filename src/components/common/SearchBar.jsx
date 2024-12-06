@@ -128,7 +128,7 @@ export function SearchBarAndZoomControls({ toggleDashboard, showDashboard }) {
 
   return (
     <div
-      className="absolute top-2 md:top-4 left-1/2 -translate-x-1/2 z-[9999] w-full max-w-4xl px-2 sm:px-4"
+      className="absolute top-2 md:top-4 left-1/2 -translate-x-1/2 z-[9999] w-full max-w-2xl px-2 sm:px-4"
       style={{ position: 'fixed' }}
     >
       <div className="search-controls-container flex flex-nowrap gap-1 sm:gap-2 items-center rounded-full py-2 px-3">
@@ -138,7 +138,7 @@ export function SearchBarAndZoomControls({ toggleDashboard, showDashboard }) {
           onValueChange={setSearchQuery}
           classNames={{
             base: "flex-1 min-w-0",
-            inputWrapper: "bg-transparent shadow-none hover:!bg-transparent h-11",
+            inputWrapper: "bg-transparent shadow-none hover:!bg-transparent h-11 focus-within:ring-2 focus-within:ring-blue-500",
             input: "text-base px-4"
           }}
           radius="full"

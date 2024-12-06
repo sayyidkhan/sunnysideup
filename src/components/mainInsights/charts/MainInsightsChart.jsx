@@ -1,6 +1,7 @@
 import React from 'react';
 import {Tabs, Tab, Card, CardBody} from "@nextui-org/react";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Bar, ComposedChart } from 'recharts';
+import { HumidityAndTemperatureChart } from './HumidityAndTemperatureChart';
+import { MinMaxTemperatureChart } from './MinMaxTemperatureChart';
 
 const data = [
   { time: '00:00', power: 0, consumption: 200 },
@@ -15,60 +16,19 @@ const data = [
   { time: '23:59', power: 0, consumption: 200 },
 ];
 
-function HumidityAndTemperatureChart() {
-  return <ResponsiveContainer width="100%" height="82.5%">
-    <ComposedChart data={data} margin={{ top: 10, right: -5, left: -25, bottom: 10 }}>
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis
-        dataKey="time"
-        tick={{ fontSize: 12, fill: '#FFFFFF' }}
-        height={40}
-        stroke="#FFFFFF" />
-      <YAxis
-        unit=" MW"
-        domain={[0, 'auto']}
-        tick={{ fontSize: 12, fill: '#FFFFFF' }}
-        width={85}
-        tickFormatter={(value) => value === 0 ? '0' : value}
-        stroke="#FFFFFF" />
-      <Tooltip
-        contentStyle={{
-          backgroundColor: 'rgba(0, 0, 0, 0.8)',
-          border: 'none',
-          borderRadius: '4px',
-          color: '#fff'
-        }}
-        itemStyle={{
-          color: '#fff'
-        }} />
-      <Legend 
-        verticalAlign="bottom"
-        height={30}
-      />
-      <Bar
-        dataKey="consumption"
-        fill="#FF6B6B"
-        name="Power Consumption"
-        opacity={0.8} />
-      <Line
-        type="monotone"
-        dataKey="power"
-        stroke="#39FF14"
-        name="Power Generation"
-        strokeWidth={2}
-        dot={true} />
-    </ComposedChart>
-  </ResponsiveContainer>;
-}
-
 function MainInsightsTabs() {
   return (
-    <div className="flex flex-col max-w-[700px] mx-auto px-0 md:px-3 pt-0 md:pt-4">
-      <Tabs aria-label="Options" classNames={{
-        tab: "text-[11px] md:text-base whitespace-normal h-[32px] md:h-auto py-1 md:py-2 min-h-[32px] md:min-h-[40px]",
-        tabList: "gap-2 md:gap-4",
-        cursor: "w-full",
-      }}>
+    <div className="flex flex-col max-w-[1200px] mx-auto px-0 md:px-3 pt-0 md:pt-4">
+      <Tabs 
+        aria-label="Options" 
+        classNames={{
+          tab: "text-[11px] md:text-base whitespace-normal h-[32px] md:h-auto py-1 md:py-2 min-h-[32px] md:min-h-[40px] bg-white/5 data-[selected=true]:bg-white/70 hover:bg-white/15 border border-white/20 rounded-lg focus:outline-none focus-visible:ring-0 data-[selected=true]:text-gray-800",
+          tabList: "gap-2 md:gap-4",
+          cursor: "w-full bg-white/30",
+          panel: "pt-2",
+          tabContent: "group-data-[selected=true]:text-gray-800"
+        }}
+      >
         <Tab key="humidity_and_radiation" title="Humidity and Radiation">
           <Card className="bg-transparent shadow-none">
             <CardBody className="h-[250px] md:h-[380px] px-1 md:px-4">
@@ -78,12 +38,11 @@ function MainInsightsTabs() {
         </Tab>
         <Tab key="min_max_temperature" title="Min/Max Temperature">
           <Card className="bg-transparent shadow-none">
-            <CardBody>
-              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+            <CardBody className="h-[250px] md:h-[380px] px-1 md:px-4">
+              <MinMaxTemperatureChart />
             </CardBody>
           </Card>  
         </Tab>
-
       </Tabs>
     </div>  
   );
