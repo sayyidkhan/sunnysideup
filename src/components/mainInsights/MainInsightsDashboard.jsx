@@ -5,7 +5,7 @@ import { mark } from 'framer-motion/client';
 
 const baseStyles = {
   width: '100%',
-  background: 'linear-gradient(135deg, rgba(80,119,195,0.45) 0%, rgba(80,119,195,0.35) 100%)',
+  background: 'linear-gradient(135deg, rgba(80,119,195,0.55) 0%, rgba(80,119,195,0.75) 100%)',
   backdropFilter: 'blur(30px)',
   borderRadius: '20px',
   border: '1px solid rgba(255,255,255,0.18)',
