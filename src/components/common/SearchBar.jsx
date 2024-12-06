@@ -70,7 +70,7 @@ export function RightSideIcons({ toggleDashboard, showDashboard }) {
           width: '180px',
           height: '90px',
           right: '-6px',
-          bottom: '12px',
+          bottom: '10px',
           zIndex: 9996,
           padding: '8px',
           ...debugStyles
@@ -128,7 +128,7 @@ export function SearchBarAndZoomControls({ toggleDashboard, showDashboard }) {
 
   return (
     <div
-      className="absolute top-4 left-1/2 -translate-x-1/2 z-[9999] w-full max-w-4xl px-2 sm:px-4"
+      className="absolute top-2 md:top-4 left-1/2 -translate-x-1/2 z-[9999] w-full max-w-4xl px-2 sm:px-4"
       style={{ position: 'fixed' }}
     >
       <div className="search-controls-container flex flex-nowrap gap-1 sm:gap-2 items-center rounded-full py-2 px-3">

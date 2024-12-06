@@ -19,6 +19,7 @@ export default function WeatherMap() {
         style={{ height: "100vh", width: "100%" }}
         attributionControl={false}
         zoomControl={false}
+        className="md:pt-0 pt-4"
       >
         <SearchBarAndZoomControls toggleDashboard={toggleDashboard} showDashboard={showDashboard} />
         <TileLayer

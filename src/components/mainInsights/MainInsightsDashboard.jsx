@@ -1,6 +1,7 @@
 import React from 'react';
 import { MainInsightsCards } from './cards/MainInsightsCards';
 import { MainInsightsChart } from './charts/MainInsightsChart';
+import { mark } from 'framer-motion/client';
 
 const baseStyles = {
   width: '100%',
@@ -18,7 +19,8 @@ const styles = {
   },
   mobileContainer: {
     ...baseStyles,
-    padding: '1rem'
+    padding: '1rem',
+    marginTop: '-0.6rem'
   }
 };
 
@@ -37,10 +39,10 @@ export function MainInsightsDashboard({ show = true }) {
 
       {/* Mobile View */}
       <div className="fixed top-0 left-0 right-0 z-[999] flex md:hidden flex-col">
-        <div className="py-24 mt-8">
+        <div className="py-20 mt-2">
           <MainInsightsCards />
         </div>
-        <div className="px-2 -mt-20">
+        <div className="px-2 -mt-16">
           <div style={{...styles.mobileContainer}}>
             <div className="w-full flex justify-center">
               <MainInsightsChart />
