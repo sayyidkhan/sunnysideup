@@ -11,7 +11,7 @@ const data = [
   { time: '23:59', power: 0 },
 ];
 
-export function PerformanceChart() {
+export function MainInsightsChart() {
   return (
     <div className="w-full h-[200px] md:h-[400px]">
       <h2 className="text-2xl md:text-3xl font-semibold mt-2 mb-4 text-center text-white">Daily Power Generation</h2>

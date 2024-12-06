@@ -1,6 +1,6 @@
 import React from 'react';
-import { PerformanceCards } from './PerformanceCards';
-import { PerformanceChart } from './PerformanceChart';
+import { MainInsightsCards } from './cards/MainInsightsCards';
+import { MainInsightsChart } from './charts/MainInsightsChart';
 
 const baseStyles = {
   width: '100%',
@@ -22,26 +22,26 @@ const styles = {
   }
 };
 
-export function PerformanceContainer() {
+export function MainInsightsDashboard() {
   return (
     <>
       {/* Desktop View */}
       <div className="fixed top-32 right-12 z-[999] hidden md:flex md:flex-col gap-4">
-        <PerformanceCards />
+        <MainInsightsCards />
         <div style={{...styles.desktopContainer}}>
-          <PerformanceChart />
+          <MainInsightsChart />
         </div>
       </div>
 
       {/* Mobile View */}
       <div className="fixed top-0 left-0 right-0 z-[999] flex md:hidden flex-col">
         <div className="py-24 mt-8">
-          <PerformanceCards />
+          <MainInsightsCards />
         </div>
         <div className="px-2 -mt-20">
           <div style={{...styles.mobileContainer}}>
             <div className="w-full flex justify-center">
-              <PerformanceChart />
+              <MainInsightsChart />
             </div>
           </div>
         </div>

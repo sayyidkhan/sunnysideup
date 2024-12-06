@@ -1,6 +1,6 @@
 import React from 'react';
 
-export function PerformanceCards() {
+export function MainInsightsCards() {
   return (
     <div className="flex w-full px-2">
       <div className="flex-1 performance-card p-2 md:p-4 mr-2">
