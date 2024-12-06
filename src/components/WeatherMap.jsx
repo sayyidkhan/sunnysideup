@@ -23,7 +23,9 @@ export default function WeatherMap() {
       >
         <SearchBarAndZoomControls toggleDashboard={toggleDashboard} showDashboard={showDashboard} />
         <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          subdomains={['a', 'b', 'c']}
         />
         <Marker position={MAP_CONFIG.DEFAULT_CENTER}>
           <Popup>
