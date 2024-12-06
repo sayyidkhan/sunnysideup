@@ -26,7 +26,7 @@ export default function WeatherMap() {
       <MapContainer 
         center={MAP_CONFIG.DEFAULT_CENTER}
         zoom={MAP_CONFIG.DEFAULT_ZOOM}
-        style={{ height: "100vh", width: "100%" }}
+        style={{ height: "100vh", width: "100%", zIndex: 0 }}
         attributionControl={false}
         zoomControl={false}
         className="md:pt-0 pt-4"
@@ -36,9 +36,18 @@ export default function WeatherMap() {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           subdomains={['a', 'b', 'c']}
+          className="z-0"
         />
-        <Marker position={MAP_CONFIG.DEFAULT_CENTER}>
-          <Popup>
+        <Marker 
+          position={MAP_CONFIG.DEFAULT_CENTER}
+          eventHandlers={{
+            click: (e) => {
+              e.originalEvent.stopPropagation();
+            },
+          }}
+          zIndexOffset={1000}
+        >
+          <Popup className="z-[1000]">
             A pretty CSS3 popup. <br /> Easily customizable.
           </Popup>
         </Marker>
