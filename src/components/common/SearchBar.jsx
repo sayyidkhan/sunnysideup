@@ -7,6 +7,7 @@ import { IoGridOutline } from "react-icons/io5";
 import { IoPersonOutline } from "react-icons/io5";
 import { IoAddOutline } from "react-icons/io5";
 import { IoRemoveOutline } from "react-icons/io5";
+import { DEBUG_CONFIG } from '../../constants/data';
 
 export const SearchIcon = () => <IoSearchOutline className="text-white text-xl" />;
 
@@ -38,36 +39,77 @@ function MapZoomControl() {
 }
 
 export function RightSideIcons({ toggleDashboard, showDashboard }) {
+  const debugStyles = DEBUG_CONFIG.SHOW_CLICK_BOUNDARIES_FOR_RIGHT_SIDE_ICONS ? {
+    border: '2px dashed red',
+    backgroundColor: 'rgba(255, 0, 0, 0.15)',
+  } : {};
+
   return (
-    <div className="flex gap-2 right-side-icons">
-      {/* bell icon */}
-      <Button
-        isIconOnly
-        radius="full"
-        variant="flat"
-        className="bg-white/90 backdrop-blur-xl shadow-xl min-w-10 h-10"
-      >
-        <IoNotificationsOutline className="text-xl" />
-      </Button>
-      {/* dashboard icon */}
-      <Button
-        isIconOnly
-        radius="full"
-        variant="flat"
-        className={`bg-white/90 backdrop-blur-xl shadow-xl min-w-10 h-10 transition-transform ${showDashboard ? 'bg-opacity-100' : 'bg-opacity-75'}`}
-        onClick={toggleDashboard}
-      >
-        <IoGridOutline className="text-xl" />
-      </Button>
-      {/* user icon */}
-      <Button
-        isIconOnly
-        radius="full"
-        variant="flat"
-        className="bg-white/90 backdrop-blur-xl shadow-xl min-w-10 h-10"
-      >
-        <IoPersonOutline className="text-xl" />
-      </Button>
+    <div className="relative pointer-events-none">
+      {/* Desktop click blocking layer */}
+      <div 
+        className="absolute md:block hidden" 
+        style={{ 
+          cursor: 'default',
+          pointerEvents: 'all',
+          borderRadius: '30px',
+          position: 'absolute',
+          width: '180px',  // Width to cover 3 buttons + gaps
+          height: '80px',  // Height to cover buttons + padding
+          left: '-16px',   // Negative margin to extend left
+          top: '-16px',    // Negative margin to extend top
+          right: '-16px',  // Extend right
+          bottom: '-16px', // Extend bottom
+          zIndex: 9997,
+          ...debugStyles
+        }} 
+      />
+      {/* Mobile click blocking layer */}
+      <div 
+        className="fixed md:hidden block" 
+        style={{ 
+          cursor: 'default',
+          pointerEvents: 'all',
+          borderRadius: '50px',  // Match the mobile UI's border radius
+          width: '180px',
+          height: '90px',
+          right: '-6px',
+          bottom: '12px',
+          zIndex: 9997,
+          padding: '8px',
+          ...debugStyles
+        }} 
+      />
+      <div className="flex gap-2 right-side-icons relative pointer-events-auto z-[9998]">
+        {/* bell icon */}
+        <Button
+          isIconOnly
+          radius="full"
+          variant="flat"
+          className="bg-white/90 backdrop-blur-xl shadow-xl min-w-10 h-10"
+        >
+          <IoNotificationsOutline className="text-xl" />
+        </Button>
+        {/* dashboard icon */}
+        <Button
+          isIconOnly
+          radius="full"
+          variant="flat"
+          className={`bg-white/90 backdrop-blur-xl shadow-xl min-w-10 h-10 transition-transform ${showDashboard ? 'bg-opacity-100' : 'bg-opacity-75'}`}
+          onClick={toggleDashboard}
+        >
+          <IoGridOutline className="text-xl" />
+        </Button>
+        {/* user icon */}
+        <Button
+          isIconOnly
+          radius="full"
+          variant="flat"
+          className="bg-white/90 backdrop-blur-xl shadow-xl min-w-10 h-10"
+        >
+          <IoPersonOutline className="text-xl" />
+        </Button>
+      </div>
     </div>
   );
 }

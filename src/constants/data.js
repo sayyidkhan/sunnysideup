@@ -14,6 +14,11 @@ export const MAP_CONFIG = {
     MAX_ZOOM: 18,
 };
 
+// Debug flags
+export const DEBUG_CONFIG = {
+    SHOW_CLICK_BOUNDARIES_FOR_RIGHT_SIDE_ICONS: false, // Toggle to show/hide click blocking boundaries for right side icons
+};
+
 // Add more constants as needed
 // export const YOUR_CONSTANT = {
 //     // your data here
