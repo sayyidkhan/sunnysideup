@@ -1,8 +1,9 @@
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
 import { useState } from 'react';
 import { MAP_CONFIG } from '../constants/data';
 import { SearchBarAndZoomControls, RightSideIcons } from './common/SearchBar';
 import { MainInsightsDashboard } from './mainInsights/MainInsightsDashboard';
+import { DetailInsightsDashboard } from './detailedInsights/DetailInsightsDashboard';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
@@ -14,11 +15,27 @@ L.Icon.Default.mergeOptions({
   shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
 });
 
+function MapEvents({ onMapClick }) {
+  useMapEvents({
+    click: (e) => {
+      onMapClick(e.latlng);
+    },
+  });
+  return null;
+}
+
 export default function WeatherMap() {
   const [showDashboard, setShowDashboard] = useState(true);
+  const [showSiteDetails, setShowSiteDetails] = useState(false);
+  const [selectedLocation, setSelectedLocation] = useState(null);
 
   const toggleDashboard = () => {
     setShowDashboard(prev => !prev);
+  };
+
+  const handleMapClick = (latlng) => {
+    setSelectedLocation(latlng);
+    setShowSiteDetails(true);
   };
 
   return (
@@ -38,21 +55,30 @@ export default function WeatherMap() {
           subdomains={['a', 'b', 'c']}
           className="z-0"
         />
+        <MapEvents onMapClick={handleMapClick} />
         <Marker 
           position={MAP_CONFIG.DEFAULT_CENTER}
           eventHandlers={{
             click: (e) => {
               e.originalEvent.stopPropagation();
+              setShowSiteDetails(true);
             },
           }}
           zIndexOffset={1000}
         >
-          <Popup className="z-[1000]">
+          {/* <Popup className="z-[1000]">
             A pretty CSS3 popup. <br /> Easily customizable.
-          </Popup>
+          </Popup> */}
         </Marker>
       </MapContainer>
       <MainInsightsDashboard show={showDashboard} />
+      <DetailInsightsDashboard 
+        show={showSiteDetails}
+        onClose={() => setShowSiteDetails(false)}
+        siteData={{
+          location: selectedLocation
+        }}
+      />
       <div className="mobile-icons">
         <RightSideIcons toggleDashboard={toggleDashboard} showDashboard={showDashboard} />
       </div>
