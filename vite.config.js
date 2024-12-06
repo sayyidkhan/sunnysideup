@@ -23,7 +23,7 @@ export default defineConfig(({ mode }) => {
       }
     },
     server: {
-      port: 3000
+      port: mode === 'production' ? 3000 : 5173
     },
     base: mode === 'production' ? '/' : '/'
   }

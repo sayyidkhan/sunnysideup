@@ -1,14 +1,18 @@
 import { Suspense, lazy } from 'react';
 import './App.css';
 
-const MyMap = lazy(() => import('./components/MyMap'));
+const WeatherMap = lazy(() => import('./components/WeatherMap'));
 
 function App() {
   return (
-    <div className="app">
-      <div className="map-container">
-        <Suspense fallback={<div>Loading map...</div>}>
-          <MyMap />
+    <div className="app w-full h-screen">
+      <div className="map-container w-full h-full">
+        <Suspense fallback={
+          <div className="w-full h-full flex items-center justify-center">
+            Loading map...
+          </div>
+        }>
+          <WeatherMap />
         </Suspense>
       </div>
     </div>

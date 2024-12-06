@@ -73,7 +73,7 @@
 
 .mobile-icons .right-side-icons {
   position: fixed;
-  bottom: 20px;
+  bottom: 10px;
   right: 10px;
   z-index: 9999;
   display: flex;
@@ -192,6 +192,12 @@
   border-radius: 50px;
   border: 1px solid rgba(255, 255, 255, 0.12);
   transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .search-controls-container {
+    top: 0.25rem;
+  }
 }
 
 .search-controls-container:hover {
