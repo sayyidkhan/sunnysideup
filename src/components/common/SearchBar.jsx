@@ -45,42 +45,8 @@ export function RightSideIcons({ toggleDashboard, showDashboard }) {
   } : {};
 
   return (
-    <div className="relative pointer-events-none">
-      {/* Desktop click blocking layer */}
-      <div 
-        className="absolute md:block hidden" 
-        style={{ 
-          cursor: 'default',
-          pointerEvents: 'all',
-          borderRadius: '30px',
-          position: 'absolute',
-          width: '180px',  // Width to cover 3 buttons + gaps
-          height: '80px',  // Height to cover buttons + padding
-          left: '-16px',   // Negative margin to extend left
-          top: '-16px',    // Negative margin to extend top
-          right: '-16px',  // Extend right
-          bottom: '-16px', // Extend bottom
-          zIndex: 9997,
-          ...debugStyles
-        }} 
-      />
-      {/* Mobile click blocking layer */}
-      <div 
-        className="fixed md:hidden block" 
-        style={{ 
-          cursor: 'default',
-          pointerEvents: 'all',
-          borderRadius: '50px',  // Match the mobile UI's border radius
-          width: '180px',
-          height: '90px',
-          right: '-6px',
-          bottom: '12px',
-          zIndex: 9997,
-          padding: '8px',
-          ...debugStyles
-        }} 
-      />
-      <div className="flex gap-2 right-side-icons relative pointer-events-auto z-[9998]">
+    <div className="relative">
+      <div className="flex gap-2 right-side-icons">
         {/* bell icon */}
         <Button
           isIconOnly
