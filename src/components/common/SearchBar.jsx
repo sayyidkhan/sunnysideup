@@ -46,7 +46,37 @@ export function RightSideIcons({ toggleDashboard, showDashboard }) {
 
   return (
     <div className="relative">
-      <div className="flex gap-2 right-side-icons">
+      {/* Desktop debug visualization layer */}
+      <div 
+        className="absolute md:block hidden pointer-events-none" 
+        style={{ 
+          borderRadius: '30px',
+          position: 'absolute',
+          width: '180px',  // Width to cover 3 buttons + gaps
+          height: '80px',  // Height to cover buttons + padding
+          left: '-16px',   // Negative margin to extend left
+          top: '-16px',    // Negative margin to extend top
+          right: '-16px',  // Extend right
+          bottom: '-16px', // Extend bottom
+          zIndex: 9996,
+          ...debugStyles
+        }} 
+      />
+      {/* Mobile debug visualization layer */}
+      <div 
+        className="fixed md:hidden block pointer-events-none" 
+        style={{ 
+          borderRadius: '50px',  // Match the mobile UI's border radius
+          width: '180px',
+          height: '90px',
+          right: '-6px',
+          bottom: '12px',
+          zIndex: 9996,
+          padding: '8px',
+          ...debugStyles
+        }} 
+      />
+      <div className="flex gap-2 right-side-icons relative z-[9998]">
         {/* bell icon */}
         <Button
           isIconOnly
