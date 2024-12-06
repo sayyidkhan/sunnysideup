@@ -15,7 +15,24 @@ const baseStyles = {
 const styles = {
   desktopContainer: {
     ...baseStyles,
-    padding: '0 0.5rem'
+    padding: '0 0.5rem',
+    transform: 'scale(0.8)',
+    transformOrigin: 'top right',
+    width: '100%'
+  },
+  desktopCards: {
+    transform: 'scale(0.75)',
+    transformOrigin: 'top right',
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'flex-end'
+  },
+  desktopWrapper: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-end',
+    gap: '0.5rem',
+    width: '500px'  // Fixed width for consistent sizing
   },
   mobileContainer: {
     ...baseStyles,
@@ -28,18 +45,22 @@ export function MainInsightsDashboard({ show = true }) {
   if (!show) return null;
   
   return (
-    <React.Fragment>
+    <div className="w-full">
       {/* Desktop View */}
-      <div className="fixed top-32 right-12 z-[999] hidden md:flex md:flex-col gap-4">
-        <MainInsightsCards />
-        <div style={{...styles.desktopContainer}}>
-          <MainInsightsChart />
+      <div className="hidden md:block fixed top-32 right-10 z-[999]">
+        <div className="w-full max-w-[1200px] transform scale-75 origin-top ml-24">
+          <MainInsightsCards />
+        </div>
+        <div className="w-full max-w-[1200px] -mt-12">
+          <div style={styles.desktopContainer}>
+            <MainInsightsChart />
+          </div>
         </div>
       </div>
 
       {/* Mobile View */}
       <div className="fixed top-0 left-0 right-0 z-[999] flex md:hidden flex-col">
-        <div className="py-20 mt-2">
+        <div className="px-2 py-20 mr-2">
           <MainInsightsCards />
         </div>
         <div className="px-2 -mt-16">
@@ -50,6 +71,6 @@ export function MainInsightsDashboard({ show = true }) {
           </div>
         </div>
       </div>
-    </React.Fragment>
+    </div>
   );
 }

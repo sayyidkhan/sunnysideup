@@ -16,8 +16,8 @@ const data = [
 ];
 
 function HumidityAndTemperatureChart() {
-  return <ResponsiveContainer width="100%" height="85%">
-    <ComposedChart data={data} margin={{ top: 10, right: 0, left: -30, bottom: 10 }}>
+  return <ResponsiveContainer width="100%" height="82.5%">
+    <ComposedChart data={data} margin={{ top: 10, right: -5, left: -25, bottom: 10 }}>
       <CartesianGrid strokeDasharray="3 3" />
       <XAxis
         dataKey="time"
@@ -28,7 +28,7 @@ function HumidityAndTemperatureChart() {
         unit=" MW"
         domain={[0, 'auto']}
         tick={{ fontSize: 12, fill: '#FFFFFF' }}
-        width={60}
+        width={85}
         tickFormatter={(value) => value === 0 ? '0' : value}
         stroke="#FFFFFF" />
       <Tooltip
@@ -63,7 +63,7 @@ function HumidityAndTemperatureChart() {
 
 function MainInsightsTabs() {
   return (
-    <div className="flex flex-col max-w-[700px] mx-auto px-2 md:px-3 pt-0 md:pt-4">
+    <div className="flex flex-col max-w-[700px] mx-auto px-0 md:px-3 pt-0 md:pt-4">
       <Tabs aria-label="Options" classNames={{
         tab: "text-[11px] md:text-base whitespace-normal h-[32px] md:h-auto py-1 md:py-2 min-h-[32px] md:min-h-[40px]",
         tabList: "gap-2 md:gap-4",
@@ -71,7 +71,7 @@ function MainInsightsTabs() {
       }}>
         <Tab key="humidity_and_radiation" title="Humidity and Radiation">
           <Card className="bg-transparent shadow-none">
-            <CardBody className="h-[250px] md:h-[380px]">
+            <CardBody className="h-[250px] md:h-[380px] px-1 md:px-4">
               <HumidityAndTemperatureChart />
             </CardBody>
           </Card>  
@@ -91,7 +91,7 @@ function MainInsightsTabs() {
 
 export function MainInsightsChart() {
   return (
-    <div className="w-full h-[240px] md:h-[400px]">
+    <div className="w-full h-[250px] md:h-[400px]">
       <div className="w-full h-full flex justify-center">
         <div className="w-full md:w-full h-full">
           <MainInsightsTabs />
