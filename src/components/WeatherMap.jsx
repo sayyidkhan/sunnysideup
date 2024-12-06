@@ -1,9 +1,16 @@
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { useState } from 'react';
 import { MAP_CONFIG } from '../constants/data';
 import { SearchBarAndZoomControls, RightSideIcons } from './common/SearchBar';
 import { MainInsightsDashboard } from './mainInsights/MainInsightsDashboard';
 
 export default function WeatherMap() {
+  const [showDashboard, setShowDashboard] = useState(true);
+
+  const toggleDashboard = () => {
+    setShowDashboard(prev => !prev);
+  };
+
   return (
     <div className="relative w-full h-full">
       <MapContainer 
@@ -13,7 +20,7 @@ export default function WeatherMap() {
         attributionControl={false}
         zoomControl={false}
       >
-        <SearchBarAndZoomControls />
+        <SearchBarAndZoomControls toggleDashboard={toggleDashboard} showDashboard={showDashboard} />
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
@@ -23,9 +30,9 @@ export default function WeatherMap() {
           </Popup>
         </Marker>
       </MapContainer>
-      <MainInsightsDashboard />
+      <MainInsightsDashboard show={showDashboard} />
       <div className="mobile-icons">
-        <RightSideIcons />
+        <RightSideIcons toggleDashboard={toggleDashboard} showDashboard={showDashboard} />
       </div>
     </div>
   );

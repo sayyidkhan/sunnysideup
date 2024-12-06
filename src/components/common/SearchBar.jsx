@@ -1,37 +1,14 @@
 import { useState } from 'react';
 import { useMap } from 'react-leaflet';
 import { Input, Button } from "@nextui-org/react";
+import { IoSearchOutline } from "react-icons/io5";
+import { IoNotificationsOutline } from "react-icons/io5";
+import { IoGridOutline } from "react-icons/io5";
+import { IoPersonOutline } from "react-icons/io5";
+import { IoAddOutline } from "react-icons/io5";
+import { IoRemoveOutline } from "react-icons/io5";
 
-
-
-export const SearchIcon = (props) => (
-  <svg
-    aria-hidden="true"
-    fill="none"
-    focusable="false"
-    height="1em"
-    role="presentation"
-    viewBox="0 0 24 24"
-    width="1em"
-    {...props}
-    className="text-white"
-  >
-    <path
-      d="M11.5 21C16.7467 21 21 16.7467 21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21Z"
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="2"
-    />
-    <path
-      d="M22 22L20 20"
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="2"
-    />
-  </svg>
-);
+export const SearchIcon = () => <IoSearchOutline className="text-white text-xl" />;
 
 function MapZoomControl() {
   const map = useMap();
@@ -45,9 +22,7 @@ function MapZoomControl() {
         className="bg-white/90 backdrop-blur-xl shadow-xl min-w-10 h-10"
         onClick={() => map.zoomIn()}
       >
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-          <path d="M12 4V20M4 12H20" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-        </svg>
+        <IoAddOutline className="text-xl" />
       </Button>
       <Button
         isIconOnly
@@ -56,57 +31,48 @@ function MapZoomControl() {
         className="bg-white/90 backdrop-blur-xl shadow-xl min-w-10 h-10"
         onClick={() => map.zoomOut()}
       >
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-          <path d="M4 12H20" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-        </svg>
+        <IoRemoveOutline className="text-xl" />
       </Button>
     </div>
   );
 }
 
-export function RightSideIcons() {
+export function RightSideIcons({ toggleDashboard, showDashboard }) {
   return (
     <div className="flex gap-2 right-side-icons">
+      {/* bell icon */}
       <Button
         isIconOnly
         radius="full"
         variant="flat"
         className="bg-white/90 backdrop-blur-xl shadow-xl min-w-10 h-10"
       >
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M18 8C18 6.4087 17.3679 4.88258 16.2426 3.75736C15.1174 2.63214 13.5913 2 12 2C10.4087 2 8.88258 2.63214 7.75736 3.75736C6.63214 4.88258 6 6.4087 6 8C6 15 3 17 3 17H21C21 17 18 15 18 8Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-          <path d="M13.73 21C13.5542 21.3031 13.3019 21.5547 12.9982 21.7295C12.6946 21.9044 12.3504 21.9965 12 21.9965C11.6496 21.9965 11.3054 21.9044 11.0018 21.7295C10.6982 21.5547 10.4458 21.3031 10.27 21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
+        <IoNotificationsOutline className="text-xl" />
       </Button>
+      {/* dashboard icon */}
       <Button
         isIconOnly
         radius="full"
         variant="flat"
-        className="bg-white/90 backdrop-blur-xl shadow-xl min-w-10 h-10"
+        className={`bg-white/90 backdrop-blur-xl shadow-xl min-w-10 h-10 transition-transform ${showDashboard ? 'bg-opacity-100' : 'bg-opacity-75'}`}
+        onClick={toggleDashboard}
       >
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M4 4H10V10H4V4Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-          <path d="M14 4H20V10H14V4Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-          <path d="M4 14H10V20H4V14Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-          <path d="M14 14H20V20H14V14Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
+        <IoGridOutline className="text-xl" />
       </Button>
+      {/* user icon */}
       <Button
         isIconOnly
         radius="full"
         variant="flat"
         className="bg-white/90 backdrop-blur-xl shadow-xl min-w-10 h-10"
       >
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-          <path d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
+        <IoPersonOutline className="text-xl" />
       </Button>
     </div>
   );
 }
 
-export function SearchBarAndZoomControls() {
+export function SearchBarAndZoomControls({ toggleDashboard, showDashboard }) {
   // this react component is used to consolidate all the search bar UI and logic
   const [searchQuery, setSearchQuery] = useState("");
   const map = useMap();
@@ -158,7 +124,7 @@ export function SearchBarAndZoomControls() {
           variant="bordered"
         />
         <div className="desktop-icons">
-          <RightSideIcons />
+          <RightSideIcons toggleDashboard={toggleDashboard} showDashboard={showDashboard} />
         </div>
       </div>
     </div>

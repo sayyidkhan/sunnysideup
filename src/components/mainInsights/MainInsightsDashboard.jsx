@@ -22,9 +22,11 @@ const styles = {
   }
 };
 
-export function MainInsightsDashboard() {
+export function MainInsightsDashboard({ show = true }) {
+  if (!show) return null;
+  
   return (
-    <>
+    <React.Fragment>
       {/* Desktop View */}
       <div className="fixed top-32 right-12 z-[999] hidden md:flex md:flex-col gap-4">
         <MainInsightsCards />
@@ -46,6 +48,6 @@ export function MainInsightsDashboard() {
           </div>
         </div>
       </div>
-    </>
+    </React.Fragment>
   );
 }
