@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useMap } from 'react-leaflet';
-import { Input, Button } from "@nextui-org/react";
+import { Input, Button, Tooltip } from "@nextui-org/react";
 import { IoSearchOutline } from "react-icons/io5";
 import { IoNotificationsOutline } from "react-icons/io5";
 import { IoGridOutline } from "react-icons/io5";
@@ -17,24 +17,52 @@ function MapZoomControl() {
 
   return (
     <div className="flex gap-1">
-      <Button
-        isIconOnly
-        radius="full"
-        variant="flat"
-        className="bg-white/90 backdrop-blur-xl shadow-xl min-w-10 h-10"
-        onClick={() => map.zoomIn()}
+      <Tooltip 
+        content="Zoom In"
+        placement="bottom"
+        delay={0}
+        closeDelay={0}
+        classNames={{
+          content: [
+            "py-1 px-2 shadow-xl text-xs",
+            "text-white bg-default-600/90",
+            "rounded-lg"
+          ],
+        }}
       >
-        <IoAddOutline className="text-xl" />
-      </Button>
-      <Button
-        isIconOnly
-        radius="full"
-        variant="flat"
-        className="bg-white/90 backdrop-blur-xl shadow-xl min-w-10 h-10"
-        onClick={() => map.zoomOut()}
+        <Button
+          isIconOnly
+          radius="full"
+          variant="flat"
+          className="bg-white/90 backdrop-blur-xl shadow-xl min-w-10 h-10"
+          onClick={() => map.zoomIn()}
+        >
+          <IoAddOutline className="text-xl" />
+        </Button>
+      </Tooltip>
+      <Tooltip 
+        content="Zoom Out"
+        placement="bottom"
+        delay={0}
+        closeDelay={0}
+        classNames={{
+          content: [
+            "py-1 px-2 shadow-xl text-xs",
+            "text-white bg-default-600/90",
+            "rounded-lg"
+          ],
+        }}
       >
-        <IoRemoveOutline className="text-xl" />
-      </Button>
+        <Button
+          isIconOnly
+          radius="full"
+          variant="flat"
+          className="bg-white/90 backdrop-blur-xl shadow-xl min-w-10 h-10"
+          onClick={() => map.zoomOut()}
+        >
+          <IoRemoveOutline className="text-xl" />
+        </Button>
+      </Tooltip>
     </div>
   );
 }
@@ -87,31 +115,59 @@ export function RightSideIcons({ toggleDashboard, showDashboard }) {
         >
           <IoNotificationsOutline className="text-xl" />
         </Button>
-        {/* dashboard icon */}
-        <Button
-          isIconOnly
-          radius="full"
-          variant="flat"
-          className={`bg-white/90 backdrop-blur-xl shadow-xl min-w-10 h-10 transition-transform ${showDashboard ? 'bg-opacity-100' : 'bg-opacity-75'}`}
-          onClick={toggleDashboard}
-        >
-          <IoGridOutline className="text-xl" />
-        </Button>
-        {/* user icon */}
-        <Button
-          isIconOnly
-          radius="full"
-          variant="flat"
-          className="bg-white/90 backdrop-blur-xl shadow-xl min-w-10 h-10"
-          onClick={() => {
-            const map = window.leafletMap;
-            if (map) {
-              map.setView(MAP_CONFIG.DEFAULT_CENTER, MAP_CONFIG.DEFAULT_ZOOM);
-            }
+        {/* dashboard toggle button */}
+        <Tooltip 
+          content={showDashboard ? "Hide Main Dashboard" : "Show Main Dashboard"}
+          placement="bottom"
+          delay={0}
+          closeDelay={0}
+          classNames={{
+            content: [
+              "py-1 px-2 shadow-xl text-xs",
+              "text-white bg-default-600/90",
+              "rounded-lg"
+            ],
           }}
         >
-          <IoPersonOutline className="text-xl" />
-        </Button>
+          <Button
+            isIconOnly
+            radius="full"
+            variant="flat"
+            className={`bg-white/90 backdrop-blur-xl shadow-xl min-w-10 h-10 transition-transform ${showDashboard ? 'bg-opacity-100' : 'bg-opacity-75'}`}
+            onClick={toggleDashboard}
+          >
+            <IoGridOutline className="text-xl" />
+          </Button>
+        </Tooltip>
+        {/* user icon */}
+        <Tooltip 
+          content="Reset Map View" 
+          placement="bottom"
+          delay={0}
+          closeDelay={0}
+          classNames={{
+            content: [
+              "py-1 px-2 shadow-xl text-xs",
+              "text-white bg-default-600/90",
+              "rounded-lg"
+            ],
+          }}
+        >
+          <Button
+            isIconOnly
+            radius="full"
+            variant="flat"
+            className="bg-white/90 backdrop-blur-xl shadow-xl min-w-10 h-10"
+            onClick={() => {
+              const map = window.leafletMap;
+              if (map) {
+                map.setView(MAP_CONFIG.DEFAULT_CENTER, MAP_CONFIG.DEFAULT_ZOOM);
+              }
+            }}
+          >
+            <IoPersonOutline className="text-xl" />
+          </Button>
+        </Tooltip>
       </div>
     </div>
   );
