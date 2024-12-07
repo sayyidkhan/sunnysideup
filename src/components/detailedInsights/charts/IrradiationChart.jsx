@@ -4,7 +4,7 @@ import { Card } from '../shared/Card';
 
 export function IrradiationChart({ data }) {
   return (
-    <Card title="Irradiation Timeseries" className="h-full">
+    <Card className="h-full">
       <div className="h-full p-4">
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart

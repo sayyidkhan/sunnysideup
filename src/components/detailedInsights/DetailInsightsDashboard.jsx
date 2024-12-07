@@ -6,7 +6,7 @@ import { DetailAssetsCard } from './cards/DetailAssetsCard';
 import { DetailPerformanceCard } from './cards/DetailPerformanceCard';
 import { DetailLocationCard } from './cards/DetailLocationCard';
 import { DetailGenerationCard } from './cards/DetailGenerationCard';
-import { IrradiationChart } from './charts/IrradiationChart';
+import { DetailInsightsChart } from './charts/DetailInsightsChart';
 
 const SidebarItem = ({ icon: Icon, label, active }) => (
   <div className={`flex items-center gap-2 px-3 py-2 rounded-lg cursor-pointer transition-colors ${active ? 'text-white bg-white/10' : 'text-white/60 hover:text-white hover:bg-white/5'}`}>
@@ -86,7 +86,13 @@ export function DetailInsightsDashboard({ show, onClose, siteData }) {
                 </div>
 
                 <div className="col-span-9 row-span-1">
-                  <IrradiationChart data={chartData} />
+                  <div className="h-full bg-white/10 backdrop-blur-lg rounded-xl p-3">
+                    <div className="h-[220px] sm:h-[240px] md:h-[300px] lg:h-[320px] xl:h-[360px] 2xl:h-[400px] w-full overflow-hidden">
+                      <div className="w-[120%] -ml-[10%] xl:w-[160%] xl:-ml-[30%] 2xl:w-[110%] 2xl:-ml-[5%] transform scale-[0.28] sm:scale-[0.32] md:scale-[0.45] lg:scale-[0.5] xl:scale-[0.62] 2xl:scale-[0.85] origin-top pt-0 2xl:pt-4">
+                        <DetailInsightsChart />
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
