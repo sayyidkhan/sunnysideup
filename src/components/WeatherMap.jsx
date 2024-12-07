@@ -33,6 +33,9 @@ export default function WeatherMap() {
         attributionControl={false}
         zoomControl={false}
         className="md:pt-0 pt-4"
+        ref={(mapInstance) => {
+          window.leafletMap = mapInstance;
+        }}
       >
         <SearchBarAndZoomControls toggleDashboard={toggleDashboard} showDashboard={showDashboard} />
         <TileLayer

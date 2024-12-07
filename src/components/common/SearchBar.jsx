@@ -7,7 +7,7 @@ import { IoGridOutline } from "react-icons/io5";
 import { IoPersonOutline } from "react-icons/io5";
 import { IoAddOutline } from "react-icons/io5";
 import { IoRemoveOutline } from "react-icons/io5";
-import { DEBUG_CONFIG } from '../../constants/data';
+import { DEBUG_CONFIG, MAP_CONFIG } from '../../constants/data';
 import { createPortal } from 'react-dom';
 
 export const SearchIcon = () => <IoSearchOutline className="text-white text-xl" />;
@@ -103,6 +103,12 @@ export function RightSideIcons({ toggleDashboard, showDashboard }) {
           radius="full"
           variant="flat"
           className="bg-white/90 backdrop-blur-xl shadow-xl min-w-10 h-10"
+          onClick={() => {
+            const map = window.leafletMap;
+            if (map) {
+              map.setView(MAP_CONFIG.DEFAULT_CENTER, MAP_CONFIG.DEFAULT_ZOOM);
+            }
+          }}
         >
           <IoPersonOutline className="text-xl" />
         </Button>
