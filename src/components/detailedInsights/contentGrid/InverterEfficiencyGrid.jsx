@@ -1,9 +1,9 @@
 import React from 'react';
-import DetailAssetsCard from '../cards/DetailAssetsCard';
-import DetailPerformanceCard from '../cards/DetailPerformanceCard';
-import DetailLocationCard from '../cards/DetailLocationCard';
-import DetailGenerationCard from '../cards/DetailGenerationCard';
-import DetailInsightsChart from '../charts/DetailInsightsChart';
+import { DetailAssetsCard } from '../cards/DetailAssetsCard';
+import { DetailPerformanceCard } from '../cards/DetailPerformanceCard';
+import { DetailLocationCard } from '../cards/DetailLocationCard';
+import { DetailGenerationCard } from '../cards/DetailGenerationCard';
+import { DetailInsightsChart } from '../charts/DetailInsightsChart';
 
 export function InverterEfficiencyGrid({ data }) {
   return (

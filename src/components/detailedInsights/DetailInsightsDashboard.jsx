@@ -1,16 +1,9 @@
 import React, { useState } from 'react';
 import { IoClose, IoNotifications, IoMenu } from 'react-icons/io5';
 import { IoSettingsOutline } from 'react-icons/io5';
-
 import { Button } from "@nextui-org/react";
-import { IoNotificationsOutline } from "react-icons/io5";
-import { DetailAssetsCard } from './cards/DetailAssetsCard';
-import { DetailPerformanceCard } from './cards/DetailPerformanceCard';
-import { DetailLocationCard } from './cards/DetailLocationCard';
-import { DetailGenerationCard } from './cards/DetailGenerationCard';
-import { DetailInsightsChart } from './charts/DetailInsightsChart';
-import { InverterEfficiencyGrid } from './contentGrid/InverterEfficiencyGrid';
 import { baseStyles } from '../mainInsights/MainInsightsDashboard';
+import { InverterEfficiencyGrid } from './contentGrid/InverterEfficiencyGrid';
 
 const mobileBackgroundColor = '#1e3356';
 
@@ -154,7 +147,7 @@ export function DetailInsightsDashboard({ show, onClose, siteData }) {
                   variant="flat"
                   className={detailInsightsDashboardStyles.button.iconButton}
                 >
-                  <IoNotificationsOutline className={detailInsightsDashboardStyles.button.iconStyle} />
+                  <IoNotifications className={detailInsightsDashboardStyles.button.iconStyle} />
                 </Button>
                 <Button
                   onClick={onClose}
