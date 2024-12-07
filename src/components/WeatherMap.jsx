@@ -15,15 +15,6 @@ L.Icon.Default.mergeOptions({
   shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
 });
 
-function MapEvents({ onMapClick }) {
-  useMapEvents({
-    click: (e) => {
-      onMapClick(e.latlng);
-    },
-  });
-  return null;
-}
-
 export default function WeatherMap() {
   const [showDashboard, setShowDashboard] = useState(true);
   const [showSiteDetails, setShowSiteDetails] = useState(false);
@@ -31,11 +22,6 @@ export default function WeatherMap() {
 
   const toggleDashboard = () => {
     setShowDashboard(prev => !prev);
-  };
-
-  const handleMapClick = (latlng) => {
-    setSelectedLocation(latlng);
-    setShowSiteDetails(true);
   };
 
   return (
@@ -55,7 +41,6 @@ export default function WeatherMap() {
           subdomains={['a', 'b', 'c']}
           className="z-0"
         />
-        <MapEvents onMapClick={handleMapClick} />
         <Marker 
           position={MAP_CONFIG.DEFAULT_CENTER}
           eventHandlers={{
@@ -76,7 +61,18 @@ export default function WeatherMap() {
         show={showSiteDetails}
         onClose={() => setShowSiteDetails(false)}
         siteData={{
-          location: selectedLocation
+          siteName: "Bhadla Solar Park",
+          capacity: "100",
+          irradiance: "850",
+          plantMatrix: "10x10",
+          daysOnline: "365",
+          performanceRatio: "98.10",
+          inverterEfficiency: "96",
+          generation: "1250",
+          location: {
+            lat: MAP_CONFIG.DEFAULT_CENTER[0],
+            long: MAP_CONFIG.DEFAULT_CENTER[1]
+          }
         }}
       />
       <div className="mobile-icons">
