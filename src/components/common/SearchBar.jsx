@@ -181,11 +181,7 @@ export function SearchBarAndZoomControls({ toggleDashboard, showDashboard }) {
 
   // Mock data for suggestions - replace this with your actual data source
   const mockLocations = [
-    "New York, USA",
-    "London, UK",
-    "Tokyo, Japan",
-    "Paris, France",
-    "Sydney, Australia"
+    "Singapore",
   ];
 
   const handleSearch = () => {
@@ -215,17 +211,16 @@ export function SearchBarAndZoomControls({ toggleDashboard, showDashboard }) {
 
   const handleInputChange = (value) => {
     setSearchQuery(value);
-    if (value.trim()) {
-      // Filter suggestions based on input
-      const filtered = mockLocations.filter(location =>
-        location.toLowerCase().includes(value.toLowerCase())
-      );
-      setSuggestions(filtered);
-      setIsOpen(true);
-    } else {
-      setSuggestions([]);
-      setIsOpen(false);
-    }
+    // Filter locations and capitalize each word
+    const filtered = mockLocations.filter(location =>
+      location.toLowerCase().includes(value.toLowerCase())
+    ).map(location => 
+      location.split(' ').map(word => 
+        word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+      ).join(' ')
+    );
+    setSuggestions(filtered);
+    setIsOpen(filtered.length > 0);
   };
 
   const handleSuggestionClick = (suggestion) => {
