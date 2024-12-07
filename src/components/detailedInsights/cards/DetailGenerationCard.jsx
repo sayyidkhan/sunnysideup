@@ -1,5 +1,5 @@
 import React from 'react';
-import { DetailInsightsCard } from '../shared/DetailInsightsCard';
+import { DetailInsightsCard } from './DetailInsightsCard';
 
 export function DetailGenerationCard({ generation }) {
   return (

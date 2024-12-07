@@ -1,6 +1,6 @@
 import React from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import { DetailInsightsCard } from '../shared/DetailInsightsCard';
+import { DetailInsightsCard } from '../cards/DetailInsightsCard';
 
 export function IrradiationChart({ data }) {
   return (

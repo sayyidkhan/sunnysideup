@@ -1,6 +1,6 @@
 import React from 'react';
-import { DetailInsightsCard } from '../shared/DetailInsightsCard';
-import { MiniMap } from '../shared/MiniMap';
+import { DetailInsightsCard } from './DetailInsightsCard';
+import { MiniMap } from '../charts/MiniMap';
 
 export function DetailLocationCard({ location }) {
   return (

@@ -1,6 +1,6 @@
 import React from 'react';
-import { DetailInsightsCard } from '../shared/DetailInsightsCard';
-import { MetricDisplay } from '../shared/MetricDisplay';
+import { DetailInsightsCard } from './DetailInsightsCard';
+import { MetricDisplay } from './MetricDisplay';
 
 export function DetailAssetsCard({ data }) {
   return (
