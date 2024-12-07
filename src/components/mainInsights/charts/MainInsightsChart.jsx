@@ -23,9 +23,10 @@ function MainInsightsTabs() {
         aria-label="Options" 
         classNames={{
           tab: "text-[11px] md:text-base whitespace-normal h-[32px] md:h-auto py-1 md:py-2 min-h-[32px] md:min-h-[40px] bg-white/5 data-[selected=true]:bg-white/70 hover:bg-white/15 border border-white/20 rounded-lg focus:outline-none focus-visible:ring-0 data-[selected=true]:text-gray-800",
-          tabList: "gap-2 md:gap-4",
+          tabList: "gap-2 md:gap-4 w-full flex justify-center",
           cursor: "w-full bg-white/30",
           panel: "pt-2",
+          base: "w-full",
           tabContent: "group-data-[selected=true]:text-gray-800"
         }}
       >
