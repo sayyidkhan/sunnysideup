@@ -65,32 +65,32 @@ export function DetailInsightsDashboard({ show, onClose, siteData }) {
     <div className="fixed inset-0 z-[1001] flex items-center justify-center">
       <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={onClose} />
 
-      <div style={detailInsightsDashboardStyles.container} className="relative w-[95vw] sm:w-[90vw] md:w-[85vw] h-[90vh] bg-[#0B1526]/95 backdrop-blur-xl rounded-2xl shadow-2xl overflow-hidden">
+      <div style={detailInsightsDashboardStyles.container} className="relative w-[95vw] lg:w-[85vw] h-[90vh] bg-[#0B1526]/95 backdrop-blur-xl rounded-2xl shadow-2xl overflow-hidden">
         <div className="h-full flex">
           {/* Mobile Sidebar */}
           <div 
-            className={`absolute md:relative md:w-52 w-64 border-r border-white/10 flex flex-col h-full transition-transform duration-300 z-50 bg-[#1e3356] md:bg-transparent ${
-              isSidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
+            className={`absolute lg:relative lg:w-52 w-64 border-r border-white/10 flex flex-col h-full transition-transform duration-300 z-50 bg-[#1e3356] lg:bg-transparent ${
+              isSidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
             }`}
             style={isSidebarOpen ? detailInsightsDashboardStyles.mobileBackground : {
               ...detailInsightsDashboardStyles.sidebar,
-              '@media (min-width: 768px)': detailInsightsDashboardStyles.sidebar,
-              '@media (max-width: 767px)': detailInsightsDashboardStyles.mobileBackground
+              '@media (min-width: 1024px)': detailInsightsDashboardStyles.sidebar,
+              '@media (max-width: 1023px)': detailInsightsDashboardStyles.mobileBackground
             }}
           >
-            <div className="h-[68px] flex items-center justify-between px-4 flex-shrink-0 bg-[#1e3356] md:bg-transparent">
+            <div className="h-[68px] flex items-center justify-between px-4 flex-shrink-0 bg-[#1e3356] lg:bg-transparent">
               <h2 className="text-xl font-semibold text-white">Dashboards</h2>
               <Button
                 isIconOnly
                 radius="full"
                 variant="flat"
-                className={`${detailInsightsDashboardStyles.button.iconButton} md:hidden`}
+                className={`${detailInsightsDashboardStyles.button.iconButton} lg:hidden`}
                 onClick={toggleSidebar}
               >
                 <IoClose className={detailInsightsDashboardStyles.button.iconStyle} />
               </Button>
             </div>
-            <div className="flex-1 p-3 space-y-1 overflow-y-auto bg-[#1e3356] md:bg-transparent">
+            <div className="flex-1 p-3 space-y-1 overflow-y-auto bg-[#1e3356] lg:bg-transparent">
               <SidebarItem 
                 icon={IoSettingsOutline} 
                 label="Inverter Efficiency" 
@@ -133,7 +133,7 @@ export function DetailInsightsDashboard({ show, onClose, siteData }) {
                   isIconOnly
                   radius="full"
                   variant="flat"
-                  className={`${detailInsightsDashboardStyles.button.iconButton} md:hidden`}
+                  className={`${detailInsightsDashboardStyles.button.iconButton} lg:hidden`}
                   onClick={toggleSidebar}
                 >
                   <IoMenu className={detailInsightsDashboardStyles.button.iconStyle} />
@@ -162,8 +162,8 @@ export function DetailInsightsDashboard({ show, onClose, siteData }) {
             </div>
 
             {/* Content Grid */}
-            <div className="flex-1 p-4 overflow-y-auto md:overflow-hidden">
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-4 auto-rows-min md:grid-rows-2 md:h-full">
+            <div className="flex-1 p-4 overflow-y-auto lg:overflow-hidden">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 auto-rows-min lg:grid-rows-2 lg:h-full">
                 {activeItem === 'Inverter Efficiency' && <InverterEfficiencyGrid data={data} />}
               </div>
             </div>
