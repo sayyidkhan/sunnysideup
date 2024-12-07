@@ -5,11 +5,15 @@ import { mark } from 'framer-motion/client';
 
 const baseStyles = {
   width: '100%',
-  background: 'linear-gradient(135deg, rgba(80,119,195,0.55) 0%, rgba(80,119,195,0.75) 100%)',
+  padding: '1.5rem 2rem',
+  background: 'linear-gradient(135deg, rgba(80,119,195,0.45) 0%, rgba(80,119,195,0.35) 100%)',
   backdropFilter: 'blur(30px)',
+  WebkitBackdropFilter: 'blur(30px)',
+  boxShadow: '0 8px 32px 0 rgba(80,119,195,0.15), inset 0 0 0 1px rgba(255,255,255,0.25)',
   borderRadius: '20px',
   border: '1px solid rgba(255,255,255,0.18)',
-  boxShadow: '0 8px 32px 0 rgba(80,119,195,0.15), inset 0 0 0 1px rgba(255,255,255,0.25)',
+  color: 'white',
+  transition: 'all 0.3s ease'
 };
 
 const styles = {
