@@ -5,7 +5,7 @@ export function MainInsightsCards() {
     <div className="flex w-full gap-2">
       <div className="flex-1 performance-card p-3 md:p-4">
         <div className="card-header">
-          <h2 className="text-xl md:text-2xl font-semibold mb-2">Assets</h2>
+          <h2 className="text-xl md:text-4xl font-semibold mb-2">Assets</h2>
           <div className="invisible text-sm text-gray-300 mb-3">Placeholder</div>
         </div>
         <div className="card-content">
@@ -19,8 +19,8 @@ export function MainInsightsCards() {
 
       <div className="flex-1 performance-card p-3 md:p-4">
         <div className="card-header">
-          <h2 className="text-xl md:text-2xl font-semibold mb-2">Today's Performance</h2>
-          <div className="text-xs md:text-sm text-gray-300 mb-3">
+          <h2 className="text-xl md:text-4xl font-semibold mb-2">Today's Performance</h2>
+          <div className="text-xs md:text-sm text-white mb-3">
             <div className="flex flex-col md:flex-row md:gap-1">
               <span>Last Updated</span>
               <span>18 Jan 2023 10:38am</span>
