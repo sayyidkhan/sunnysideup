@@ -4,7 +4,7 @@ import { DetailInsightsCard } from './DetailInsightsCard';
 export function DetailGenerationCard({ generation }) {
   return (
     <DetailInsightsCard title="Today's Generation" className="h-full">
-      <div className="h-full flex items-center justify-center">
+      <div className="h-full flex items-center justify-center xl:-mt-8 2xl:-mt-8">
         <div className="relative w-28 h-28">
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-2xl font-semibold text-white text-center">
