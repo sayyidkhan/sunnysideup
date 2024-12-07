@@ -15,9 +15,17 @@ interface Forecast {
   forecast: string;
 }
 
+interface ValidPeriod {
+  start: string;
+  end: string;
+}
+
 interface WeatherForecastResponse {
   area_metadata: AreaMetadata[];
   items: Array<{
+    update_timestamp: string;
+    timestamp: string;
+    valid_period: ValidPeriod;
     forecasts: Forecast[];
   }>;
 }
@@ -29,9 +37,16 @@ interface LocationForecast {
   forecast: string;
 }
 
+interface WeatherData {
+  locations: LocationForecast[];
+  update_timestamp: string;
+  timestamp: string;
+  valid_period: ValidPeriod;
+}
+
 const BASE_URL = 'https://api.data.gov.sg/v1/environment';
 
-export const fetchLocationAndForecast = async (): Promise<LocationForecast[]> => {
+export const fetchLocationAndForecast = async (): Promise<WeatherData> => {
   try {
     // Fetch 2-hour weather forecast
     const forecastResponse = await axios.get<WeatherForecastResponse>(`${BASE_URL}/2-hour-weather-forecast`);
@@ -41,10 +56,11 @@ export const fetchLocationAndForecast = async (): Promise<LocationForecast[]> =>
     }
 
     const areaMetadata = forecastResponse.data.area_metadata;
-    const forecasts = forecastResponse.data.items[0].forecasts;
+    const item = forecastResponse.data.items[0];
+    const forecasts = item.forecasts;
 
     // Combine location data with forecasts
-    const locationForecasts: LocationForecast[] = areaMetadata.map(area => {
+    const locationForecasts = areaMetadata.map(area => {
       const forecast = forecasts.find(f => f.area === area.name);
       return {
         name: area.name,
@@ -54,7 +70,12 @@ export const fetchLocationAndForecast = async (): Promise<LocationForecast[]> =>
       };
     });
 
-    return locationForecasts;
+    return {
+      locations: locationForecasts,
+      update_timestamp: item.update_timestamp,
+      timestamp: item.timestamp,
+      valid_period: item.valid_period
+    };
   } catch (error) {
     console.error('Error fetching weather data:', error);
     throw error;
