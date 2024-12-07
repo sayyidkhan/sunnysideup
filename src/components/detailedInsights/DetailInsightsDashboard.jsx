@@ -53,7 +53,7 @@ const IrradiationChart = ({ data }) => (
       </defs>
       <CartesianGrid 
         strokeDasharray="3 3" 
-        vertical={false}
+        vertical={true}
         stroke="rgba(255,255,255,0.1)"
       />
       <XAxis 
@@ -135,7 +135,7 @@ export function DetailInsightsDashboard({ show, onClose, siteData }) {
         <div className="h-full flex">
           {/* Sidebar */}
           <div className="w-52 border-r border-white/10 flex flex-col">
-            <div className="h-[68px] flex items-center px-4 border-b border-white/10 flex-shrink-0">
+            <div className="h-[68px] flex items-center px-4 flex-shrink-0">
               <h2 className="text-xl font-semibold text-white">Dashboards</h2>
             </div>
             <div className="flex-1 p-3 space-y-1 overflow-y-auto">
@@ -150,7 +150,7 @@ export function DetailInsightsDashboard({ show, onClose, siteData }) {
           {/* Main Content */}
           <div className="flex-1 flex flex-col h-full">
             {/* Header */}
-            <div className="h-[68px] flex items-center justify-between px-4 border-b border-white/10 flex-shrink-0">
+            <div className="h-[68px] flex items-center justify-between px-4 flex-shrink-0">
               <h2 className="text-xl font-semibold text-white">{data.siteName}</h2>
               <div className="flex gap-4">
                 <button className="text-white/60 hover:text-white hover:bg-white/10 p-2 rounded-full transition-colors">
@@ -214,9 +214,9 @@ export function DetailInsightsDashboard({ show, onClose, siteData }) {
                   <Card title="" className="h-full relative p-0">
                     <div className="h-full w-full">
                       <MiniMap location={data.location} />
-                      <div className="absolute bottom-3 left-3 z-[400] space-y-1">
-                        <span className="text-sm font-medium text-white bg-gray-800/30 backdrop-blur-sm px-3 py-1 rounded-lg inline-block">Location</span>
-                        <div className="text-sm font-medium text-white bg-gray-800/30 backdrop-blur-sm px-3 py-1 rounded-lg inline-block">
+                      <div className="absolute bottom-3 left-3 z-[400] flex flex-col gap-1">
+                        <div className="text-sm font-medium text-white bg-gray-800/30 backdrop-blur-sm px-3 py-1 rounded-lg">Location</div>
+                        <div className="text-sm font-medium text-white bg-gray-800/30 backdrop-blur-sm px-3 py-1 rounded-lg">
                           {data.location?.lat?.toFixed(2)} N {data.location?.long?.toFixed(2)} E
                         </div>
                       </div>
