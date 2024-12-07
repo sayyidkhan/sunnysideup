@@ -1,8 +1,9 @@
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
 import { useState } from 'react';
 import { MAP_CONFIG } from '../constants/data';
 import { SearchBarAndZoomControls, RightSideIcons } from './common/SearchBar';
 import { MainInsightsDashboard } from './mainInsights/MainInsightsDashboard';
+import { DetailInsightsDashboard } from './detailedInsights/DetailInsightsDashboard';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
@@ -16,6 +17,8 @@ L.Icon.Default.mergeOptions({
 
 export default function WeatherMap() {
   const [showDashboard, setShowDashboard] = useState(true);
+  const [showSiteDetails, setShowSiteDetails] = useState(false);
+  const [selectedLocation, setSelectedLocation] = useState(null);
 
   const toggleDashboard = () => {
     setShowDashboard(prev => !prev);
@@ -26,7 +29,7 @@ export default function WeatherMap() {
       <MapContainer 
         center={MAP_CONFIG.DEFAULT_CENTER}
         zoom={MAP_CONFIG.DEFAULT_ZOOM}
-        style={{ height: "100vh", width: "100%" }}
+        style={{ height: "100vh", width: "100%", zIndex: 0 }}
         attributionControl={false}
         zoomControl={false}
         className="md:pt-0 pt-4"
@@ -36,14 +39,42 @@ export default function WeatherMap() {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           subdomains={['a', 'b', 'c']}
+          className="z-0"
         />
-        <Marker position={MAP_CONFIG.DEFAULT_CENTER}>
-          <Popup>
+        <Marker 
+          position={MAP_CONFIG.DEFAULT_CENTER}
+          eventHandlers={{
+            click: (e) => {
+              e.originalEvent.stopPropagation();
+              setShowSiteDetails(true);
+            },
+          }}
+          zIndexOffset={1000}
+        >
+          {/* <Popup className="z-[1000]">
             A pretty CSS3 popup. <br /> Easily customizable.
-          </Popup>
+          </Popup> */}
         </Marker>
       </MapContainer>
       <MainInsightsDashboard show={showDashboard} />
+      <DetailInsightsDashboard 
+        show={showSiteDetails}
+        onClose={() => setShowSiteDetails(false)}
+        siteData={{
+          siteName: "Bhadla Solar Park",
+          capacity: "100",
+          irradiance: "850",
+          plantMatrix: "10x10",
+          daysOnline: "365",
+          performanceRatio: "98.10",
+          inverterEfficiency: "96",
+          generation: "1250",
+          location: {
+            lat: MAP_CONFIG.DEFAULT_CENTER[0],
+            long: MAP_CONFIG.DEFAULT_CENTER[1]
+          }
+        }}
+      />
       <div className="mobile-icons">
         <RightSideIcons toggleDashboard={toggleDashboard} showDashboard={showDashboard} />
       </div>

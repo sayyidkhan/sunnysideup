@@ -5,11 +5,15 @@ import { mark } from 'framer-motion/client';
 
 const baseStyles = {
   width: '100%',
-  background: 'linear-gradient(135deg, rgba(80,119,195,0.55) 0%, rgba(80,119,195,0.75) 100%)',
+  padding: '1.5rem 2rem',
+  background: 'linear-gradient(135deg, rgba(80,119,195,0.45) 0%, rgba(80,119,195,0.35) 100%)',
   backdropFilter: 'blur(30px)',
+  WebkitBackdropFilter: 'blur(30px)',
+  boxShadow: '0 8px 32px 0 rgba(80,119,195,0.15), inset 0 0 0 1px rgba(255,255,255,0.25)',
   borderRadius: '20px',
   border: '1px solid rgba(255,255,255,0.18)',
-  boxShadow: '0 8px 32px 0 rgba(80,119,195,0.15), inset 0 0 0 1px rgba(255,255,255,0.25)',
+  color: 'white',
+  transition: 'all 0.3s ease'
 };
 
 const styles = {
@@ -45,26 +49,30 @@ export function MainInsightsDashboard({ show = true }) {
   if (!show) return null;
   
   return (
-    <div className="w-full">
+    <div className="w-full pointer-events-none">
       {/* Desktop View */}
-      <div className="hidden md:block fixed top-32 right-10 z-[999]">
+      <div className="hidden md:block fixed top-32 right-10 z-[900]">
         <div className="w-full max-w-[1200px] transform scale-75 origin-top ml-24">
-          <MainInsightsCards />
+          <div className="pointer-events-auto">
+            <MainInsightsCards />
+          </div>
         </div>
         <div className="w-full max-w-[1200px] -mt-12">
-          <div style={styles.desktopContainer}>
+          <div style={{...styles.desktopContainer}} className="pointer-events-auto">
             <MainInsightsChart />
           </div>
         </div>
       </div>
 
       {/* Mobile View */}
-      <div className="fixed top-0 left-0 right-0 z-[999] flex md:hidden flex-col">
+      <div className="fixed top-0 left-0 right-0 z-[900] flex md:hidden flex-col">
         <div className="px-2 py-20 mr-2">
-          <MainInsightsCards />
+          <div className="pointer-events-auto">
+            <MainInsightsCards />
+          </div>
         </div>
         <div className="px-2 -mt-16">
-          <div style={{...styles.mobileContainer}}>
+          <div style={{...styles.mobileContainer}} className="pointer-events-auto">
             <div className="w-full flex justify-center">
               <MainInsightsChart />
             </div>
