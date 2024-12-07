@@ -1,7 +1,7 @@
 import React from 'react';
 import {Tabs, Tab, Card, CardBody} from "@nextui-org/react";
-import { HumidityAndTemperatureChart } from './HumidityAndTemperatureChart';
-import { MinMaxTemperatureChart } from './MinMaxTemperatureChart';
+import { HumidityAndTemperatureChart } from '../../common/charts/HumidityAndTemperatureChart';
+import { MinMaxTemperatureChart } from '../../common/charts/MinMaxTemperatureChart';
 
 const data = [
   { time: '00:00', power: 0, consumption: 200 },

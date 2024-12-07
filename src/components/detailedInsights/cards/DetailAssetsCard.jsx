@@ -1,10 +1,10 @@
 import React from 'react';
-import { Card } from '../shared/Card';
-import { MetricDisplay } from '../shared/MetricDisplay';
+import { DetailInsightsCard } from './DetailInsightsCard';
+import { MetricDisplay } from './MetricDisplay';
 
 export function DetailAssetsCard({ data }) {
   return (
-    <Card title="Assets" className="h-full">
+    <DetailInsightsCard title="Assets" className="h-full">
       <div className="grid grid-cols-2 gap-4 p-4">
         <MetricDisplay 
           label="Capacity" 
@@ -27,6 +27,6 @@ export function DetailAssetsCard({ data }) {
           unit="Days"
         />
       </div>
-    </Card>
+    </DetailInsightsCard>
   );
 }
