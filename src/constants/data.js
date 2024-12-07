@@ -8,7 +8,11 @@ export const APP_CONFIG = {
 
 // Map related constants
 export const MAP_CONFIG = {
-    DEFAULT_CENTER: [1.3521, 103.8198], // Singapore coordinates
+    // Singapore coordinates
+    // I have picked this coordinates because it is the center of the country
+    // and it is a better coordinate to start with than than the original one provided
+    // original coordinates: [1.29, 103.85]
+    DEFAULT_CENTER: [1.3521, 103.8198], 
     DEFAULT_ZOOM: 12,
     MIN_ZOOM: 3,
     MAX_ZOOM: 18,
