@@ -1,7 +1,7 @@
 import React from 'react';
 import {Tabs, Tab, Card, CardBody} from "@nextui-org/react";
-import { HumidityAndTemperatureChart } from '../../mainInsights/charts/HumidityAndTemperatureChart';
-import { MinMaxTemperatureChart } from '../../mainInsights/charts/MinMaxTemperatureChart';
+import { HumidityAndTemperatureChart } from '../../common/charts/HumidityAndTemperatureChart';
+import { MinMaxTemperatureChart } from '../../common/charts/MinMaxTemperatureChart';
 
 function DetailInsightsTabs() {
   return (

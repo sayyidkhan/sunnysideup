@@ -1,9 +1,9 @@
 import React from 'react';
-import { Card } from '../shared/Card';
+import { DetailInsightsCard } from '../shared/DetailInsightsCard';
 
 export function DetailGenerationCard({ generation }) {
   return (
-    <Card title="Today's Generation" className="h-full">
+    <DetailInsightsCard title="Today's Generation" className="h-full">
       <div className="h-full flex items-center justify-center">
         <div className="relative w-28 h-28">
           <div className="absolute inset-0 flex items-center justify-center">
@@ -19,6 +19,6 @@ export function DetailGenerationCard({ generation }) {
           />
         </div>
       </div>
-    </Card>
+    </DetailInsightsCard>
   );
 }

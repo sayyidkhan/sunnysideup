@@ -1,10 +1,10 @@
 import React from 'react';
-import { Card } from '../shared/Card';
+import { DetailInsightsCard } from '../shared/DetailInsightsCard';
 import { MiniMap } from '../shared/MiniMap';
 
 export function DetailLocationCard({ location }) {
   return (
-    <Card title="" className="h-full relative p-0">
+    <DetailInsightsCard title="" className="h-full relative p-0">
       <div className="h-full w-full">
         <MiniMap location={location} />
         <div className="absolute bottom-3 left-3 z-[400] flex flex-col gap-1">
@@ -14,6 +14,6 @@ export function DetailLocationCard({ location }) {
           </div>
         </div>
       </div>
-    </Card>
+    </DetailInsightsCard>
   );
 }

@@ -1,10 +1,10 @@
 import React from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import { Card } from '../shared/Card';
+import { DetailInsightsCard } from '../shared/DetailInsightsCard';
 
 export function IrradiationChart({ data }) {
   return (
-    <Card className="h-full">
+    <DetailInsightsCard className="h-full">
       <div className="h-full p-4">
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart
@@ -56,6 +56,6 @@ export function IrradiationChart({ data }) {
           </AreaChart>
         </ResponsiveContainer>
       </div>
-    </Card>
+    </DetailInsightsCard>
   );
 }
