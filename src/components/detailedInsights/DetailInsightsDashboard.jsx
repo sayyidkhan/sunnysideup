@@ -2,11 +2,14 @@ import React from 'react';
 import { IoClose, IoNotifications } from 'react-icons/io5';
 import { IoSettingsOutline } from 'react-icons/io5';
 
+import { Button } from "@nextui-org/react";
+import { IoNotificationsOutline } from "react-icons/io5";
 import { DetailAssetsCard } from './cards/DetailAssetsCard';
 import { DetailPerformanceCard } from './cards/DetailPerformanceCard';
 import { DetailLocationCard } from './cards/DetailLocationCard';
 import { DetailGenerationCard } from './cards/DetailGenerationCard';
 import { DetailInsightsChart } from './charts/DetailInsightsChart';
+import { baseStyles } from '../mainInsights/MainInsightsDashboard';
 
 const SidebarItem = ({ icon: Icon, label, active }) => (
   <div className={`flex items-center gap-2 px-3 py-2 rounded-lg cursor-pointer transition-colors ${active ? 'text-white bg-white/10' : 'text-white/60 hover:text-white hover:bg-white/5'}`}>
@@ -14,6 +17,22 @@ const SidebarItem = ({ icon: Icon, label, active }) => (
     <span className="text-sm">{label}</span>
   </div>
 );
+
+const detailInsightsDashboardStyles = {
+  container: {
+    background: baseStyles.background,
+  },
+  content: {
+    background: baseStyles.background,
+  },
+  button: {
+    iconButton: "bg-[rgba(80,119,195,0.65)] backdrop-blur-xl shadow-xl min-w-10 h-10 hover:bg-[rgba(255,255,255,0.2)] hover:-translate-y-[1px] transition-all",
+    iconStyle: "text-xl text-white"
+  },
+  sidebar: {
+    background: 'linear-gradient(135deg, rgba(30,45,90,0.25) 0%, rgba(30,45,90,0.15) 100%)',
+  },
+};
 
 export function DetailInsightsDashboard({ show, onClose, siteData }) {
   if (!show) return null;
@@ -25,18 +44,18 @@ export function DetailInsightsDashboard({ show, onClose, siteData }) {
   };
 
   const chartData = Array.from({ length: 12 }, (_, i) => ({
-    time: `${i+1}/12`,
+    time: `${i + 1}/12`,
     value: Math.random() * 150 + 50,
   }));
 
   return (
     <div className="fixed inset-0 z-[1001] flex items-center justify-center">
       <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={onClose} />
-      
-      <div className="relative w-[85vw] h-[85vh] bg-[#1a2942]/90 backdrop-blur-xl rounded-2xl shadow-2xl overflow-hidden">
+
+      <div style={detailInsightsDashboardStyles.container} className="relative w-[85vw] h-[85vh] bg-[#1a2942]/90 backdrop-blur-xl rounded-2xl shadow-2xl overflow-hidden">
         <div className="h-full flex">
           {/* Sidebar */}
-          <div className="w-52 border-r border-white/10 flex flex-col">
+          <div style={detailInsightsDashboardStyles.sidebar} className="w-52 border-r border-white/10 flex flex-col">
             <div className="h-[68px] flex items-center px-4 flex-shrink-0">
               <h2 className="text-xl font-semibold text-white">Dashboards</h2>
             </div>
@@ -55,12 +74,23 @@ export function DetailInsightsDashboard({ show, onClose, siteData }) {
             <div className="h-[68px] flex items-center justify-between px-4 flex-shrink-0">
               <h2 className="text-xl font-semibold text-white">{data.siteName}</h2>
               <div className="flex gap-4">
-                <button className="text-white/60 hover:text-white hover:bg-white/10 p-2 rounded-full transition-colors">
-                  <IoNotifications size={20} />
-                </button>
-                <button onClick={onClose} className="text-white/60 hover:text-white hover:bg-white/10 p-2 rounded-full transition-colors">
-                  <IoClose size={20} />
-                </button>
+                <Button
+                  isIconOnly
+                  radius="full"
+                  variant="flat"
+                  className={detailInsightsDashboardStyles.button.iconButton}
+                >
+                  <IoNotificationsOutline className={detailInsightsDashboardStyles.button.iconStyle} />
+                </Button>
+                <Button
+                  onClick={onClose}
+                  isIconOnly
+                  radius="full"
+                  variant="flat"
+                  className={detailInsightsDashboardStyles.button.iconButton}
+                >
+                  <IoClose className={detailInsightsDashboardStyles.button.iconStyle} />
+                </Button>
               </div>
             </div>
 

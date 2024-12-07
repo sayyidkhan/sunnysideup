@@ -3,7 +3,7 @@ import { MainInsightsCards } from './cards/MainInsightsCards';
 import { MainInsightsChart } from './charts/MainInsightsChart';
 import { mark } from 'framer-motion/client';
 
-const baseStyles = {
+export const baseStyles = {
   width: '100%',
   padding: '1.5rem 2rem',
   background: 'linear-gradient(135deg, rgba(80,119,195,0.45) 0%, rgba(80,119,195,0.35) 100%)',
