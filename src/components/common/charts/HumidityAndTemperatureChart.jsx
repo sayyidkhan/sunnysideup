@@ -1,7 +1,8 @@
 import React from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Bar, ComposedChart } from 'recharts';
+import { NoDataFallBackUIForCharts } from './NoDataFallBackUIForCharts';
 
-const data = [
+const dummyData = [
   { time: '00:00', power: 0, consumption: 200 },
   { time: '02:40', power: 100, consumption: 300 },
   { time: '05:20', power: 300, consumption: 400 },
@@ -14,7 +15,7 @@ const data = [
   { time: '23:59', power: 0, consumption: 200 },
 ];
 
-export function HumidityAndTemperatureChart() {
+export function HumidityAndTemperatureChart({ data }) {
   const tooltipStyle = {
     contentStyle: {
       backgroundColor: 'rgba(0, 0, 0, 0.8)',
@@ -37,43 +38,49 @@ export function HumidityAndTemperatureChart() {
     }
   };
 
-  return <ResponsiveContainer width="100%" height="85%">
-    <ComposedChart data={data} margin={{ top: 10, right: 0, left: -20, bottom: 10 }}>
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis
-        dataKey="time"
-        tick={{ fontSize: 12, fill: '#FFFFFF' }}
-        height={40}
-        stroke="#FFFFFF" />
-      <YAxis
-        unit=" MW"
-        domain={[0, 'auto']}
-        tick={{ fontSize: 12, fill: '#FFFFFF' }}
-        width={85}
-        tickFormatter={(value) => value === 0 ? '0' : value}
-        stroke="#FFFFFF" />
-      <Tooltip
-        wrapperClassName="hidden md:block"
-        contentStyle={tooltipStyle.contentStyle}
-        itemStyle={tooltipStyle.itemStyle}
-        labelStyle={tooltipStyle.labelStyle}
-      />
-      <Legend 
-        verticalAlign="bottom"
-        height={30}
-      />
-      <Bar
-        dataKey="consumption"
-        fill="#FF6B6B"
-        name="Power Consumption"
-        opacity={0.8} />
-      <Line
-        type="monotone"
-        dataKey="power"
-        stroke="#39FF14"
-        name="Power Generation"
-        strokeWidth={2}
-        dot={true} />
-    </ComposedChart>
-  </ResponsiveContainer>;
+  if (!data || data.length === 0) {
+    return <NoDataFallBackUIForCharts />;
+  }
+
+  return (
+    <ResponsiveContainer width="100%" height="85%">
+      <ComposedChart data={data} margin={{ top: 10, right: 0, left: -20, bottom: 10 }}>
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis
+          dataKey="time"
+          tick={{ fontSize: 12, fill: '#FFFFFF' }}
+          height={40}
+          stroke="#FFFFFF" />
+        <YAxis
+          unit=" MW"
+          domain={[0, 'auto']}
+          tick={{ fontSize: 12, fill: '#FFFFFF' }}
+          width={85}
+          tickFormatter={(value) => value === 0 ? '0' : value}
+          stroke="#FFFFFF" />
+        <Tooltip
+          wrapperClassName="hidden md:block"
+          contentStyle={tooltipStyle.contentStyle}
+          itemStyle={tooltipStyle.itemStyle}
+          labelStyle={tooltipStyle.labelStyle}
+        />
+        <Legend 
+          verticalAlign="bottom"
+          height={30}
+        />
+        <Bar
+          dataKey="consumption"
+          fill="#FF6B6B"
+          name="Power Consumption"
+          opacity={0.8} />
+        <Line
+          type="monotone"
+          dataKey="power"
+          stroke="#39FF14"
+          name="Power Generation"
+          strokeWidth={2}
+          dot={true} />
+      </ComposedChart>
+    </ResponsiveContainer>
+  );
 }

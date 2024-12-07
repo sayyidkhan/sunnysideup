@@ -1,7 +1,8 @@
 import React from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { NoDataFallBackUIForCharts } from './NoDataFallBackUIForCharts';
 
-const data = [
+const dummyData = [
   { time: '00:00', maxTemp: 28, minTemp: 24 },
   { time: '02:40', maxTemp: 27, minTemp: 23 },
   { time: '05:20', maxTemp: 26, minTemp: 22 },
@@ -14,7 +15,7 @@ const data = [
   { time: '23:59', maxTemp: 28, minTemp: 24 },
 ];
 
-export function MinMaxTemperatureChart() {
+export function MinMaxTemperatureChart({ data }) {
   const tooltipStyle = {
     contentStyle: {
       backgroundColor: 'rgba(0, 0, 0, 0.8)',
@@ -36,6 +37,10 @@ export function MinMaxTemperatureChart() {
       marginBottom: '8px'
     }
   };
+
+  if (!data || data.length === 0) {
+    return <NoDataFallBackUIForCharts />;
+  }
 
   return <ResponsiveContainer width="100%" height="85%">
     <AreaChart data={data} margin={{ top: 10, right: 0, left: -40, bottom: 10 }}>
