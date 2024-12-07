@@ -211,6 +211,12 @@ export function SearchBarAndZoomControls({ toggleDashboard, showDashboard }) {
 
   const handleInputChange = (value) => {
     setSearchQuery(value);
+    // If search query is empty, hide dropdown
+    if (!value.trim()) {
+      setIsOpen(false);
+      setSuggestions([]);
+      return;
+    }
     // Filter locations and capitalize each word
     const filtered = mockLocations.filter(location =>
       location.toLowerCase().includes(value.toLowerCase())
@@ -268,7 +274,7 @@ export function SearchBarAndZoomControls({ toggleDashboard, showDashboard }) {
           />
           {isOpen && suggestions.length > 0 && createPortal(
             <div 
-              className="fixed bg-[#8392C8]/90 backdrop-blur-xl shadow-xl rounded-2xl max-h-60 overflow-auto z-[9999]"
+              className="fixed bg-[#8392C8]/90 backdrop-blur-xl shadow-xl rounded-2xl max-h-60 overflow-auto z-[1000]"
               style={{
                 width: document.querySelector('.search-input-wrapper')?.getBoundingClientRect().width,
                 top: document.querySelector('.search-input-wrapper')?.getBoundingClientRect().bottom + 8,
