@@ -50,13 +50,6 @@ export function DetailInsightsDashboard({ show, onClose, selectedLocation }) {
   if (!show) return null;
 
   const { locationName = 'Unknown Location', lat = 0, lng = 0, forecast = '' } = selectedLocation;
-  console.log('DetailInsightsDashboard - Location data:', { locationName, lat, lng, forecast });
-
-  const chartData = Array.from({ length: 12 }, (_, i) => ({
-    time: `${i + 1}/12`,
-    value: Math.random() * 150 + 50,
-  }));
-
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
   return (

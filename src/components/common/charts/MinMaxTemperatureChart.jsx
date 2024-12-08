@@ -12,7 +12,7 @@ const dummyData = [
   { date: '2024-01-07', min: 25, max: 34 },
 ];
 
-export function MinMaxTemperatureChart({ data }) {
+export function MinMaxTemperatureChart({ data, rotateXAxis, isMainInsights }) {
   console.log('MinMaxTemperatureChart received data:', data);
 
   // Check if data is valid
@@ -25,6 +25,9 @@ export function MinMaxTemperatureChart({ data }) {
   if (!isDataValid) {
     return <NoDataFallBackUIForCharts />;
   }
+
+  // Check if we're in MainInsights by checking the data structure
+  const isMainInsightsLocal = data?.temp_forecast?.length > 0;
 
   const tooltipStyle = {
     contentStyle: {
@@ -48,6 +51,13 @@ export function MinMaxTemperatureChart({ data }) {
     }
   };
 
+  const legendStyle = {
+    color: '#FFFFFF',
+    '@media (min-width: 1280px)': {
+      marginTop: '2rem'
+    }
+  };
+
   // If no data is provided, use dummy data
   const chartData = data?.temp_forecast?.length > 0
     ? data.temp_forecast.map(item => ({
@@ -60,15 +70,28 @@ export function MinMaxTemperatureChart({ data }) {
   console.log('Final chartData:', chartData);
 
   return (
-    <ResponsiveContainer width="100%" height="85%">
-      <AreaChart data={chartData} margin={{ top: 10, right: 0, left: -20, bottom: 10 }}>
+    <ResponsiveContainer width="100%" height={rotateXAxis ? "100%" : "85%"}>
+      <AreaChart data={chartData} margin={{ 
+        top: 5, 
+        right: 30, 
+        left: 20, 
+        bottom: 20 
+      }}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis
           dataKey="date"
-          tick={{ fontSize: 12, fill: '#FFFFFF' }}
+          tick={{ 
+            fontSize: rotateXAxis ? 11 : 16, 
+            fill: '#FFFFFF', 
+            angle: rotateXAxis ? 0 : -20, 
+            textAnchor: rotateXAxis ? 'middle' : 'end' 
+          }}
           tickLine={{ stroke: '#FFFFFF' }}
           axisLine={{ stroke: '#FFFFFF' }}
-          tickFormatter={(value) => value.split('T')[0]}
+          tickFormatter={(value) => value.split('T')[0].replace(/-/g, '/')}
+          height={45}
+          dy={10}
+          interval={rotateXAxis ? 2 : 0}
         />
         <YAxis
           tick={{ fontSize: 12, fill: '#FFFFFF' }}
@@ -78,7 +101,14 @@ export function MinMaxTemperatureChart({ data }) {
         />
         <Tooltip {...tooltipStyle} />
         <Legend 
-          wrapperStyle={{ color: '#FFFFFF' }} 
+          verticalAlign="bottom"
+          align="center"
+          wrapperStyle={{
+            color: '#FFFFFF',
+            position: 'relative',
+            top: rotateXAxis ? "-70px" : "-12.5px",
+            paddingTop: '0px'
+          }}
           formatter={(value, entry) => {
             const color = entry.dataKey === 'max' ? '#FFB6C1' : '#39FF14';
             return <span style={{ color }}>{value}</span>;

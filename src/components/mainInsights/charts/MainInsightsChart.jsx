@@ -2,6 +2,7 @@ import React from 'react';
 import {Tabs, Tab, Card, CardBody} from "@nextui-org/react";
 import { HumidityAndTemperatureChart } from '../../common/charts/HumidityAndTemperatureChart';
 import { MinMaxTemperatureChart } from '../../common/charts/MinMaxTemperatureChart';
+import { useMediaQuery } from '@react-hook/media-query';
 
 const data = [
   { time: '00:00', power: 0, consumption: 200 },
@@ -16,9 +17,11 @@ const data = [
   { time: '23:59', power: 0, consumption: 200 },
 ];
 
-function MainInsightsTabs() {
+function MainInsightsTabs({ detailedWeatherData }) {
+  const isMobile = useMediaQuery('(max-width: 768px)');
+
   return (
-    <div className="flex flex-col max-w-[1200px] mx-auto px-0 md:px-3 pt-0 md:pt-4">
+    <div className="flex flex-col w-full h-full md:px-4 md:py-4">
       <Tabs 
         aria-label="Options" 
         classNames={{
@@ -32,15 +35,15 @@ function MainInsightsTabs() {
       >
         <Tab key="humidity_and_radiation" title="Humidity and Radiation">
           <Card className="bg-transparent shadow-none">
-            <CardBody className="h-[250px] md:h-[380px] px-1 md:px-4">
-              <HumidityAndTemperatureChart />
+            <CardBody className="h-[300px] w-[110%] -ml-[5%] -mt-2 md:mt-0 md:w-full md:ml-0 md:h-[420px] px-4 md:px-8 pb-8">
+              <HumidityAndTemperatureChart data={detailedWeatherData?.humidityAndRadiationMetadata} rotateXAxis={isMobile} />
             </CardBody>
           </Card>  
         </Tab>
         <Tab key="min_max_temperature" title="Min/Max Temperature">
           <Card className="bg-transparent shadow-none">
-            <CardBody className="h-[250px] md:h-[380px] px-1 md:px-4">
-              <MinMaxTemperatureChart />
+            <CardBody className="h-[300px] w-[110%] -ml-[5%] -mt-2 md:mt-0 md:w-full md:ml-0 md:h-[420px] px-4 md:px-8 pb-8">
+              <MinMaxTemperatureChart data={detailedWeatherData?.temperature} rotateXAxis={isMobile} />
             </CardBody>
           </Card>  
         </Tab>
@@ -49,13 +52,11 @@ function MainInsightsTabs() {
   );
 }
 
-export function MainInsightsChart() {
+export function MainInsightsChart({ detailedWeatherData }) {
   return (
-    <div className="w-full h-[250px] md:h-[400px]">
-      <div className="w-full h-full flex justify-center">
-        <div className="w-full md:w-full h-full">
-          <MainInsightsTabs />
-        </div>
+    <div className="w-full h-[275px] -mt-3 md:mt-0 md:h-[450px]">
+      <div className="w-full h-full scale-95 md:scale-100">
+        <MainInsightsTabs detailedWeatherData={detailedWeatherData} />
       </div>
     </div>
   );

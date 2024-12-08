@@ -12,7 +12,7 @@ const dummyData = [
   { time: '2024-01-07T00:00', relativehumidity_2m: 84, direct_radiation: 330 },
 ];
 
-export function HumidityAndTemperatureChart({ data }) {
+export function HumidityAndTemperatureChart({ data, rotateXAxis, isMainInsights }) {
   console.log('HumidityAndTemperatureChart received data:', data);
 
   // Check if data is valid
@@ -25,6 +25,9 @@ export function HumidityAndTemperatureChart({ data }) {
   if (!isDataValid) {
     return <NoDataFallBackUIForCharts />;
   }
+
+  // Check if we're in MainInsights by checking the data structure
+  const isMainInsightsLocal = data?.radiation_and_humidity_forecast?.length > 0;
 
   const tooltipStyle = {
     contentStyle: {
@@ -56,15 +59,28 @@ export function HumidityAndTemperatureChart({ data }) {
   console.log('Final chartData for Humidity chart:', chartData);
 
   return (
-    <ResponsiveContainer width="100%" height="85%">
-      <ComposedChart data={chartData} margin={{ top: 10, right: 0, left: -20, bottom: 10 }}>
+    <ResponsiveContainer width="100%" height={rotateXAxis ? "100%" : "85%"}>
+      <ComposedChart data={chartData} margin={{ 
+        top: 5, 
+        right: 0, 
+        left: -20, 
+        bottom: 10 
+      }}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis
           dataKey="time"
-          tick={{ fontSize: 12, fill: '#FFFFFF' }}
+          tick={{ 
+            fontSize: rotateXAxis ? 11.5 : 16, 
+            fill: '#FFFFFF', 
+            angle: rotateXAxis ? 0 : -20, 
+            textAnchor: rotateXAxis ? 'middle' : 'end' 
+          }}
           tickLine={{ stroke: '#FFFFFF' }}
           axisLine={{ stroke: '#FFFFFF' }}
-          tickFormatter={(value) => value.split('T')[0]}
+          tickFormatter={(value) => value.split('T')[0].replace(/-/g, '/')}
+          height={45}
+          dy={10}
+          interval={rotateXAxis ? 2 : 0}
         />
         <YAxis
           yAxisId="left"
@@ -83,7 +99,14 @@ export function HumidityAndTemperatureChart({ data }) {
         />
         <Tooltip {...tooltipStyle} />
         <Legend
-          wrapperStyle={{ color: '#FFFFFF' }}
+          verticalAlign="bottom"
+          align="center"
+          wrapperStyle={{
+            color: '#FFFFFF',
+            position: 'relative',
+            top: rotateXAxis ? "-47.5px" : "-12.5px",
+            paddingTop: '0px'
+          }}
           formatter={(value, entry) => {
             const color = entry.dataKey === 'direct_radiation' ? '#FF7F50' : '#39FF14';
             return <span style={{ color }}>{value}</span>;

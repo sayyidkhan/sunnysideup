@@ -32,6 +32,14 @@ export default function WeatherMap() {
   const [locations, setLocations] = useState([]);
   const [singaporeForecast, setSingaporeForecast] = useState(null);
 
+  // Default Location set to Singapore
+  const defaultLocation = {
+    locationName: 'Singapore',
+    lat: MAP_CONFIG.DEFAULT_CENTER[0],
+    lng: MAP_CONFIG.DEFAULT_CENTER[1],
+    forecast: singaporeForecast,
+  };
+
   // Fetch locations from the API
   useEffect(() => {
     const fetchLocations = async () => {
@@ -78,12 +86,7 @@ export default function WeatherMap() {
           eventHandlers={{
             click: (e) => {
               e.originalEvent.stopPropagation();
-              setSelectedLocation({
-                locationName: 'Singapore',
-                lat: MAP_CONFIG.DEFAULT_CENTER[0],
-                lng: MAP_CONFIG.DEFAULT_CENTER[1],
-                forecast: singaporeForecast
-              });
+              setSelectedLocation(defaultLocation);
               setShowSiteDetails(true);
             },
           }}
@@ -133,7 +136,10 @@ export default function WeatherMap() {
           </Marker>
         ))}
       </MapContainer>
-      <MainInsightsDashboard show={showDashboard} />
+      <MainInsightsDashboard 
+        show={showDashboard}
+        selectedLocation={defaultLocation}
+      />
       <DetailInsightsDashboard 
         show={showSiteDetails}
         onClose={() => setShowSiteDetails(false)}
