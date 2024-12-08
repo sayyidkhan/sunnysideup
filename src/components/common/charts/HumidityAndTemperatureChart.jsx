@@ -58,15 +58,15 @@ export function HumidityAndTemperatureChart({ data, rotateXAxis, isMainInsights 
     <ResponsiveContainer width="100%" height={rotateXAxis ? "100%" : "85%"}>
       <ComposedChart data={chartData} margin={{ 
         top: 5, 
-        right: 0, 
-        left: -20, 
+        right: rotateXAxis ? 0 : 20, 
+        left: rotateXAxis ? 0 : 20, 
         bottom: 10 
       }}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis
           dataKey="time"
           tick={{ 
-            fontSize: rotateXAxis ? 11.5 : 16, 
+            fontSize: rotateXAxis ? 10.5 : 16, 
             fill: '#FFFFFF', 
             angle: rotateXAxis ? 0 : -20, 
             textAnchor: rotateXAxis ? 'middle' : 'end' 
