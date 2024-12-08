@@ -1,33 +1,44 @@
 import { fetchLocationAndForecast } from './locationAndTwoHourWeatherForecast.js';
 
-describe('Weather Forecast API', () => {
-  it('should fetch weather data successfully', async () => {
+describe('Singapore 2-Hour Weather Forecast', () => {
+  it('TEST LOCATION AND FORECAST', async () => {
+    // First fetch the weather data
     const weatherData = await fetchLocationAndForecast();
+    expect(weatherData).toBeDefined();
     
-    // Test the main response structure
-    expect(weatherData).toHaveProperty('locations');
-    expect(weatherData).toHaveProperty('update_timestamp');
-    expect(weatherData).toHaveProperty('timestamp');
-    expect(weatherData).toHaveProperty('valid_period');
-    
-    // Test that locations is an array
+    // Test location structure
+    //   "locations": [
+    //     {
+    //       "name": "Ang Mo Kio",
+    //       "latitude": 1.375,
+    //       "longitude": 103.839,
+    //       "forecast": "Cloudy"
+    //     },
+    //     ...
+    //   ]
     expect(Array.isArray(weatherData.locations)).toBe(true);
     expect(weatherData.locations.length).toBeGreaterThan(0);
     
-    // Test the structure of a location object
+    // Test first location structure
     const firstLocation = weatherData.locations[0];
     expect(firstLocation).toHaveProperty('name');
     expect(firstLocation).toHaveProperty('latitude');
     expect(firstLocation).toHaveProperty('longitude');
     expect(firstLocation).toHaveProperty('forecast');
     
-    // Test data types
+    // Test location data types
     expect(typeof firstLocation.name).toBe('string');
     expect(typeof firstLocation.latitude).toBe('number');
     expect(typeof firstLocation.longitude).toBe('number');
     expect(typeof firstLocation.forecast).toBe('string');
     
-    // Test timestamp formats
+    // Test timestamp and period structure
+    //   "update_timestamp": "2024-01-01T12:00:00+08:00",
+    //   "timestamp": "2024-01-01T12:00:00+08:00",
+    //   "valid_period": {
+    //     "start": "2024-01-01T12:00:00+08:00",
+    //     "end": "2024-01-01T14:00:00+08:00"
+    //   }
     expect(typeof weatherData.update_timestamp).toBe('string');
     expect(typeof weatherData.timestamp).toBe('string');
     expect(weatherData.valid_period).toHaveProperty('start');
@@ -35,10 +46,12 @@ describe('Weather Forecast API', () => {
     expect(typeof weatherData.valid_period.start).toBe('string');
     expect(typeof weatherData.valid_period.end).toBe('string');
     
-    // Log all weather data
-    console.log('\nAll Weather Data:');
-    console.log('=================');
-    console.log(JSON.stringify(weatherData, null, 2));
+    // Log sample of the data
+    console.log('\nSingapore 2-Hour Weather Forecast:');
+    console.log(JSON.stringify({
+      ...weatherData,
+      locations: weatherData.locations.slice(0, 5) // Show first 5 locations only
+    }, null, 2));
     console.log('\nTotal Locations:', weatherData.locations.length);
   }, 10000); // Increased timeout for API call
 });
