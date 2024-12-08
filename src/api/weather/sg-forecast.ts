@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { MAP_CONFIG } from '../constants/data';
+import { MAP_CONFIG } from '../../constants/data';
+import { Location, Metadata } from './types';
 
 // ==========================================
 // TYPE DEFINITIONS
@@ -33,17 +34,8 @@ interface OpenMeteoResponse {
 }
 
 interface WeatherForecastResponse {
-  location: {
-    latitude: number;
-    longitude: number;
-    timezone: string;
-    timezone_abbreviation: string;
-    elevation: number;
-  };
-  metadata: {
-    generation_time_ms: number;
-    utc_offset_seconds: number;
-  };
+  location: Location;
+  metadata: Metadata;
   units: {
     temperature: string;
     time: string;
@@ -56,17 +48,8 @@ interface WeatherForecastResponse {
 }
 
 interface HumidityAndRadiationResponse {
-  location: {
-    latitude: number;
-    longitude: number;
-    timezone: string;
-    timezone_abbreviation: string;
-    elevation: number;
-  };
-  metadata: {
-    generation_time_ms: number;
-    utc_offset_seconds: number;
-  };
+  location: Location;
+  metadata: Metadata;
   units: {
     humidity: string;
     radiation: string;
@@ -204,6 +187,6 @@ export const fetchTempOnly = (data: OpenMeteoResponse): WeatherForecastResponse 
       temperature: data.hourly_units.temperature_2m,
       time: data.hourly_units.time,
     },
-    temp_forecast: dailyData.slice(0, 10), // Ensure we only return 10 days
+    temp_forecast: dailyData,
   };
 };

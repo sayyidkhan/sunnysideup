@@ -1,4 +1,4 @@
-import { fetchLocationAndForecast } from './locationAndTwoHourWeatherForecast.js';
+import { fetchLocationAndForecast } from './sg-location';
 
 describe('Singapore 2-Hour Weather Forecast', () => {
   it('TEST LOCATION AND FORECAST', async () => {
