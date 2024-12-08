@@ -6,6 +6,9 @@ import { DetailGenerationCard } from '../cards/DetailGenerationCard';
 import { DetailInsightsChart } from '../charts/DetailInsightsChart';
 
 export function InverterEfficiencyGrid({ data }) {
+  const { locationName, lat, lng, forecast } = data;
+  console.log('InverterEfficiencyGrid - Location data:', { locationName, lat, lng, forecast });
+
   return (
     <>
       {/* Assets Card */}
@@ -20,7 +23,7 @@ export function InverterEfficiencyGrid({ data }) {
 
       {/* Location Card */}
       <div className="col-span-1 lg:col-span-3 lg:row-span-1 h-[250px] lg:h-auto">
-        <DetailLocationCard location={data.location} />
+        <DetailLocationCard location={{ locationName, lat, lng, forecast }} />
       </div>
 
       {/* Generation Card */}

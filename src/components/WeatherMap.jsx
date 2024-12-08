@@ -30,6 +30,7 @@ export default function WeatherMap() {
   const [showSiteDetails, setShowSiteDetails] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [locations, setLocations] = useState([]);
+  const [singaporeForecast, setSingaporeForecast] = useState(null);
 
   // Fetch locations from the API
   useEffect(() => {
@@ -37,6 +38,7 @@ export default function WeatherMap() {
       try {
         const weatherData = await fetchLocationAndForecast();
         setLocations(weatherData.locations);
+        setSingaporeForecast(weatherData.singaporeForecast);
       } catch (error) {
         console.error('Error fetching locations:', error);
       }
@@ -77,10 +79,10 @@ export default function WeatherMap() {
             click: (e) => {
               e.originalEvent.stopPropagation();
               setSelectedLocation({
-                name: 'Singapore',
-                latitude: MAP_CONFIG.DEFAULT_CENTER[0],
-                longitude: MAP_CONFIG.DEFAULT_CENTER[1],
-                forecast: 'Default View'
+                locationName: 'Singapore',
+                lat: MAP_CONFIG.DEFAULT_CENTER[0],
+                lng: MAP_CONFIG.DEFAULT_CENTER[1],
+                forecast: singaporeForecast
               });
               setShowSiteDetails(true);
             },
@@ -94,7 +96,7 @@ export default function WeatherMap() {
             permanent={false}
           >
             <div className="font-semibold">Singapore</div>
-            <div className="text-sm">Default View</div>
+            <div className="text-sm">{singaporeForecast}</div>
           </Tooltip>
         </Marker>
         {/* Location markers */}
@@ -106,7 +108,14 @@ export default function WeatherMap() {
             eventHandlers={{
               click: (e) => {
                 e.originalEvent.stopPropagation();
-                setSelectedLocation(location);
+                const locationData = {
+                  locationName: location.name,
+                  lat: location.latitude,
+                  lng: location.longitude,
+                  forecast: location.forecast
+                };
+                console.log('WeatherMap - Setting location:', locationData);
+                setSelectedLocation(locationData);
                 setShowSiteDetails(true);
               },
             }}
@@ -128,7 +137,7 @@ export default function WeatherMap() {
       <DetailInsightsDashboard 
         show={showSiteDetails}
         onClose={() => setShowSiteDetails(false)}
-        location={selectedLocation}
+        selectedLocation={selectedLocation}
       />
     </div>
   );
