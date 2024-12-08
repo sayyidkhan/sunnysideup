@@ -95,7 +95,7 @@ export function HumidityAndTemperatureChart({ data }) {
           dataKey="relativehumidity_2m"
           stroke="#39FF14"
           strokeWidth={2}
-          name="Humidity"
+          name="Humidity (Avg)"
           dot={false}
         />
         <Bar
@@ -103,7 +103,7 @@ export function HumidityAndTemperatureChart({ data }) {
           dataKey="direct_radiation"
           fill="#FF7F50"
           fillOpacity={0.6}
-          name="Radiation"
+          name="Radiation (Sum)"
         />
       </ComposedChart>
     </ResponsiveContainer>
