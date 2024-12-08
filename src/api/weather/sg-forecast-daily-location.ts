@@ -47,7 +47,7 @@ interface WeatherData {
 
 const BASE_URL = 'https://api.data.gov.sg/v1/environment';
 
-export const fetchLocationAndForecast = async (): Promise<WeatherData> => {
+export const fetchDailyLocationAndForecast = async (): Promise<WeatherData> => {
   try {
     // Fetch 2-hour weather forecast
     const forecastResponse = await axios.get<WeatherForecastResponse>(`${BASE_URL}/2-hour-weather-forecast`);

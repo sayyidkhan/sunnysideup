@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { MainInsightsCards } from './cards/MainInsightsCards';
 import { MainInsightsChart } from './charts/MainInsightsChart';
-import { fetchSGMainForecast, fetchTempOnly, fetchHumidityAndRadiationOnly } from '../../api/weather/sg-forecast';
+import { fetchSGMainDailyForecast, fetchDailyTemp, fetchDailyHumidityAndRadiation } from '../../api/weather/sg-forecast-daily';
 
 export const baseStyles = {
   width: '100%',
@@ -59,13 +59,13 @@ export function MainInsightsDashboard({ show = true, selectedLocation }) {
       if (!lat || !lng) return;
 
       try {
-        const mainData = await fetchSGMainForecast({
+        const mainData = await fetchSGMainDailyForecast({
           latitude: lat,
           longitude: lng
         });
 
-        const tempData = fetchTempOnly(mainData);
-        const humidityRadiationData = fetchHumidityAndRadiationOnly(mainData);
+        const tempData = fetchDailyTemp(mainData);
+        const humidityRadiationData = fetchDailyHumidityAndRadiation(mainData);
 
         setDetailedWeatherData({
           humidityAndRadiationMetadata: humidityRadiationData,

@@ -4,7 +4,7 @@ import { MAP_CONFIG } from '../constants/data';
 import { SearchBarAndZoomControls } from './common/SearchBar';
 import { MainInsightsDashboard } from './mainInsights/MainInsightsDashboard';
 import { DetailInsightsDashboard } from './detailedInsights/DetailInsightsDashboard';
-import { fetchLocationAndForecast } from '../api/weather/sg-location';
+import { fetchDailyLocationAndForecast } from '../api/weather/sg-forecast-daily-location';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
@@ -44,7 +44,7 @@ export default function WeatherMap() {
   useEffect(() => {
     const fetchLocations = async () => {
       try {
-        const weatherData = await fetchLocationAndForecast();
+        const weatherData = await fetchDailyLocationAndForecast();
         setLocations(weatherData.locations);
         setSingaporeForecast(weatherData.singaporeForecast);
       } catch (error) {

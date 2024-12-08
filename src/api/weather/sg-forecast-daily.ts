@@ -80,7 +80,7 @@ const OPEN_METEO_URL = 'https://api.open-meteo.com/v1/forecast';
 /**
  * Main function to fetch all Singapore weather forecast data from Open-Meteo API
  */
-export const fetchSGMainForecast = async (params: ForecastParams = {}): Promise<OpenMeteoResponse> => {
+export const fetchSGMainDailyForecast = async (params: ForecastParams = {}): Promise<OpenMeteoResponse> => {
   try {
     const {
       latitude = DEFAULT_PARAMS.latitude,
@@ -109,7 +109,7 @@ export const fetchSGMainForecast = async (params: ForecastParams = {}): Promise<
 /**
  * Function to extract humidity and radiation data from the main response
  */
-export const fetchHumidityAndRadiationOnly = (data: OpenMeteoResponse): HumidityAndRadiationResponse => {
+export const fetchDailyHumidityAndRadiation = (data: OpenMeteoResponse): HumidityAndRadiationResponse => {
   // Aggregate hourly data into daily averages for humidity and sum for radiation
   const dailyData = [];
   for (let i = 0; i < data.hourly.time.length; i += 24) {
@@ -159,7 +159,7 @@ export const fetchHumidityAndRadiationOnly = (data: OpenMeteoResponse): Humidity
 /**
  * Function to extract temperature data from the main response
  */
-export const fetchTempOnly = (data: OpenMeteoResponse): WeatherForecastResponse => {
+export const fetchDailyTemp = (data: OpenMeteoResponse): WeatherForecastResponse => {
   // Get only the first 10 days of data (240 hours -> 10 days)
   const dailyData = [];
   for (let i = 0; i < data.hourly.time.length; i += 24) {
