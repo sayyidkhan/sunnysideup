@@ -36,7 +36,7 @@ export function InverterEfficiencyGrid({ data }) {
         <div className="h-full bg-white/10 backdrop-blur-lg rounded-xl p-3">
           <div className="h-full w-full pt-2 pb-4 lg:pt-3 lg:pb-6">
             <div className="w-full lg:w-[120%] lg:-ml-[10%] xl:w-[160%] xl:-ml-[30%] 2xl:w-[110%] 2xl:-ml-[5%] transform scale-[0.85] lg:scale-[0.5] xl:scale-[0.62] 2xl:scale-[0.85] origin-top">
-              <DetailInsightsChart />
+              <DetailInsightsChart location={{ lat, lng }} />
             </div>
           </div>
         </div>

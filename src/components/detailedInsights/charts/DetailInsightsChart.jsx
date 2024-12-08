@@ -1,9 +1,44 @@
-import React from 'react';
-import {Tabs, Tab, Card, CardBody} from "@nextui-org/react";
+import React, { useEffect, useState } from 'react';
+import { Card, CardBody, Tab, Tabs } from '@nextui-org/react';
 import { HumidityAndTemperatureChart } from '../../common/charts/HumidityAndTemperatureChart';
 import { MinMaxTemperatureChart } from '../../common/charts/MinMaxTemperatureChart';
+import { fetchSGMainForecast, fetchHumidityAndRadiationOnly, fetchTempOnly } from '../../../api/weather/sg-forecast';
 
-function DetailInsightsTabs() {
+function DetailInsightsTabs({ location }) {
+  const [humidityAndRadiationMetadata, setHumidityAndRadiationMetadata] = useState({
+    humidityAndRadiationMetadata: null,
+    temperature: null
+  });
+
+  useEffect(() => {
+    const fetchHumidityAndRadiationData = async () => {
+      if (!location?.lat || !location?.lng) return;
+
+      try {
+        console.log('Fetching data for location:', location);
+        const mainData = await fetchSGMainForecast({
+          latitude: location.lat,
+          longitude: location.lng
+        });
+        console.log('Received mainData:', mainData);
+
+        const tempData = fetchTempOnly(mainData);
+        console.log('Temperature data:', tempData);
+
+        setHumidityAndRadiationMetadata({
+          humidityAndRadiationMetadata: fetchHumidityAndRadiationOnly(mainData),
+          temperature: tempData
+        });
+      } catch (error) {
+        console.error('Error fetching weather data:', error);
+      }
+    };
+
+    fetchHumidityAndRadiationData();
+  }, [location?.lat, location?.lng]);
+
+  console.log('Current humidityAndRadiationMetadata:', humidityAndRadiationMetadata);
+
   return (
     <div className="flex flex-col w-[120%] -ml-[10%] md:w-full md:ml-0 h-full">
       <Tabs 
@@ -20,14 +55,14 @@ function DetailInsightsTabs() {
         <Tab key="humidity_and_radiation" title="Humidity and Radiation">
           <Card className="bg-transparent shadow-none">
             <CardBody className="h-[380px] md:h-[400px] px-2 md:px-8 pt-1 pb-2 md:pb-4 w-[105%] -ml-[2.5%] md:w-full md:ml-0">
-              <HumidityAndTemperatureChart />
+              <HumidityAndTemperatureChart data={humidityAndRadiationMetadata.humidityAndRadiationMetadata} />
             </CardBody>
           </Card>  
         </Tab>
         <Tab key="min_max_temperature" title="Min/Max Temperature">
           <Card className="bg-transparent shadow-none">
             <CardBody className="h-[380px] md:h-[400px] px-2 md:px-8 pt-1 pb-2 md:pb-4 w-[105%] -ml-[2.5%] md:w-full md:ml-0">
-              <MinMaxTemperatureChart />
+              <MinMaxTemperatureChart data={humidityAndRadiationMetadata.temperature} />
             </CardBody>
           </Card>  
         </Tab>
@@ -36,10 +71,10 @@ function DetailInsightsTabs() {
   );
 }
 
-export function DetailInsightsChart() {
+export function DetailInsightsChart({ location }) {
   return (
     <div className="w-full h-full">
-      <DetailInsightsTabs />
+      <DetailInsightsTabs location={location} />
     </div>
   );
 }
