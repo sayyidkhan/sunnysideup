@@ -232,7 +232,6 @@ export function SearchBarAndZoomControls({ toggleDashboard, showDashboard }) {
 
   const handleSearch = () => {
     if (searchQuery.trim()) {
-      console.log('Searching for:', searchQuery);
       setIsOpen(false);
       // Here you can add your search logic
     }

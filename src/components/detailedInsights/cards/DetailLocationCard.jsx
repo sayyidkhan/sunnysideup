@@ -31,8 +31,6 @@ const MiniMap = lazy(() =>
 );
 
 export function DetailLocationCard({ location }) {
-  console.log('DetailLocationCard - Location data:', location);
-
   if (!location) {
     return (
       <DetailInsightsCard title="" className="h-full relative p-0">
