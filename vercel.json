@@ -19,7 +19,7 @@
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; connect-src 'self' https://api.open-meteo.com https://api.data.gov.sg; img-src 'self' data: https://*.tile.openstreetmap.org https://cdnjs.cloudflare.com https://raw.githubusercontent.com; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline';"
+          "value": "default-src 'self'; connect-src 'self' https://api.open-meteo.com https://api.data.gov.sg https://*.tile.openstreetmap.org; img-src 'self' data: https://*.tile.openstreetmap.org https://cdnjs.cloudflare.com https://raw.githubusercontent.com blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline';"
         }
       ]
     }
