@@ -64,7 +64,7 @@ export default function WeatherMap() {
       <MapContainer 
         center={MAP_CONFIG.DEFAULT_CENTER}
         zoom={MAP_CONFIG.DEFAULT_ZOOM}
-        style={{ height: "100vh", width: "100%", zIndex: 0 }}
+        style={{ height: "100vh", width: "100%", zIndex: 0, background: "#13151C" }}
         attributionControl={false}
         zoomControl={false}
         className="md:pt-0 pt-4"
@@ -72,7 +72,12 @@ export default function WeatherMap() {
           window.leafletMap = mapInstance;
         }}
       >
-        <SearchBarAndZoomControls toggleDashboard={toggleDashboard} showDashboard={showDashboard} />
+        <SearchBarAndZoomControls 
+          toggleDashboard={toggleDashboard} 
+          showDashboard={showDashboard} 
+          setShowSiteDetails={setShowSiteDetails}
+          setSelectedLocation={setSelectedLocation}
+        />
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
