@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { MAP_CONFIG } from '../constants/data';
 
 // ==========================================
 // TYPE DEFINITIONS
@@ -82,9 +83,9 @@ interface HumidityAndRadiationResponse {
 // CONFIGURATION
 // ==========================================
 const DEFAULT_PARAMS = {
-  latitude: 1.125,
-  longitude: 104,
-  timezone: 'Asia/Singapore',
+  latitude: MAP_CONFIG.DEFAULT_CENTER[0],
+  longitude: MAP_CONFIG.DEFAULT_CENTER[1],
+  timezone: MAP_CONFIG.TIMEZONE,
 };
 
 const OPEN_METEO_URL = 'https://api.open-meteo.com/v1/forecast';
