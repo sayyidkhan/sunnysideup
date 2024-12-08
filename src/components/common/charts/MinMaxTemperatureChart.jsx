@@ -13,8 +13,6 @@ const dummyData = [
 ];
 
 export function MinMaxTemperatureChart({ data, rotateXAxis, isMainInsights }) {
-  console.log('MinMaxTemperatureChart received data:', data);
-
   // Check if data is valid
   const isDataValid = data?.temp_forecast?.length > 0 && 
     data.temp_forecast.every(item => 
@@ -58,7 +56,7 @@ export function MinMaxTemperatureChart({ data, rotateXAxis, isMainInsights }) {
     }
   };
 
-  // If no data is provided, use dummy data
+  // Use API data if available, otherwise fallback to dummy data
   const chartData = data?.temp_forecast?.length > 0
     ? data.temp_forecast.map(item => ({
         date: item.date,
@@ -66,8 +64,6 @@ export function MinMaxTemperatureChart({ data, rotateXAxis, isMainInsights }) {
         max: item.temperature_2m_max
       }))
     : dummyData;
-  
-  console.log('Final chartData:', chartData);
 
   return (
     <ResponsiveContainer width="100%" height={rotateXAxis ? "100%" : "85%"}>

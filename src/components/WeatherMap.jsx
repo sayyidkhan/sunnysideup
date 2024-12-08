@@ -117,9 +117,11 @@ export default function WeatherMap() {
                   lng: location.longitude,
                   forecast: location.forecast
                 };
-                console.log('WeatherMap - Setting location:', locationData);
-                setSelectedLocation(locationData);
-                setShowSiteDetails(true);
+                if (locationData) {
+                  setSelectedLocation(locationData);
+                  setShowDashboard(false);
+                  setShowSiteDetails(true);
+                }
               },
             }}
             zIndexOffset={100}

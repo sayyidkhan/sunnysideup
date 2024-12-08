@@ -13,8 +13,6 @@ const dummyData = [
 ];
 
 export function HumidityAndTemperatureChart({ data, rotateXAxis, isMainInsights }) {
-  console.log('HumidityAndTemperatureChart received data:', data);
-
   // Check if data is valid
   const isDataValid = data?.radiation_and_humidity_forecast?.length > 0 && 
     data.radiation_and_humidity_forecast.every(item => 
@@ -55,8 +53,6 @@ export function HumidityAndTemperatureChart({ data, rotateXAxis, isMainInsights 
   const chartData = data?.radiation_and_humidity_forecast?.length > 0
     ? data.radiation_and_humidity_forecast
     : dummyData;
-
-  console.log('Final chartData for Humidity chart:', chartData);
 
   return (
     <ResponsiveContainer width="100%" height={rotateXAxis ? "100%" : "85%"}>
