@@ -1,8 +1,20 @@
 import React from 'react';
 import { DetailInsightsCard } from './DetailInsightsCard';
 import { MiniMap } from '../charts/MiniMap';
+import { BiWorld } from 'react-icons/bi';
 
 export function DetailLocationCard({ location }) {
+  if (!location) {
+    return (
+      <DetailInsightsCard title="" className="h-full relative p-0">
+        <div className="h-full w-full flex flex-col items-center justify-center gap-3">
+          <BiWorld className="w-8 h-8 text-white" />
+          <div className="text-sm text-white font-bold">Mini Map Is Not Available</div>
+        </div>
+      </DetailInsightsCard>
+    );
+  }
+
   return (
     <DetailInsightsCard title="" className="h-full relative p-0">
       <div className="h-full w-full">

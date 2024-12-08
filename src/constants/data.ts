@@ -6,9 +6,20 @@ interface MapConfig {
     MAX_ZOOM: number;
 }
 
+interface DebugConfig {
+    ENABLE_LOGS: boolean;
+    ENABLE_MOCK_DATA: boolean;
+}
+
+// Debug related constants
+export const DEBUG_CONFIG: DebugConfig = {
+    ENABLE_LOGS: true,
+    ENABLE_MOCK_DATA: false,
+};
+
 // Map related constants
 export const MAP_CONFIG: MapConfig = {
-    // Singapore coordinates d
+    // Singapore coordinates
     // I have picked this coordinates because it is the center of the country
     // and it is a better coordinate to start with than than the original one provided
     // original coordinates: [1.29, 103.85]
