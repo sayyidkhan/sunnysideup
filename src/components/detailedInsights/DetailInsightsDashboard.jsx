@@ -43,22 +43,13 @@ const detailInsightsDashboardStyles = {
   }
 };
 
-export function DetailInsightsDashboard({ show, onClose, siteData }) {
+export function DetailInsightsDashboard({ show, onClose, selectedLocation }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [activeItem, setActiveItem] = useState('Inverter Efficiency');
   
   if (!show) return null;
 
-  const data = {
-    siteName: "Bhadla Solar Park",
-    ...siteData
-  };
-
-  const chartData = Array.from({ length: 12 }, (_, i) => ({
-    time: `${i + 1}/12`,
-    value: Math.random() * 150 + 50,
-  }));
-
+  const { locationName = 'Unknown Location', lat = 0, lng = 0, forecast = '' } = selectedLocation;
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
   return (
@@ -138,7 +129,7 @@ export function DetailInsightsDashboard({ show, onClose, siteData }) {
                 >
                   <IoMenu className={detailInsightsDashboardStyles.button.iconStyle} />
                 </Button>
-                <h2 className="text-xl font-semibold text-white">{data.siteName}</h2>
+                <h2 className="text-xl font-semibold text-white">{locationName}</h2>
               </div>
               <div className="flex gap-4">
                 <Button
@@ -164,7 +155,7 @@ export function DetailInsightsDashboard({ show, onClose, siteData }) {
             {/* Content Grid */}
             <div className="flex-1 p-4 overflow-y-auto lg:overflow-hidden">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 auto-rows-min lg:grid-rows-2 lg:h-full">
-                {activeItem === 'Inverter Efficiency' && <InverterEfficiencyGrid data={data} />}
+                {activeItem === 'Inverter Efficiency' && <InverterEfficiencyGrid data={{ locationName, lat, lng, forecast }} />}
               </div>
             </div>
           </div>

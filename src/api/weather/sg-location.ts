@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Location } from './types';
 
 interface LabelLocation {
   latitude: number;

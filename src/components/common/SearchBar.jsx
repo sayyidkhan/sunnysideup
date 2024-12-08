@@ -113,7 +113,7 @@ export function RightSideIcons({ toggleDashboard, showDashboard }) {
           variant="flat"
           className="bg-white/90 backdrop-blur-xl shadow-xl min-w-10 h-10"
         >
-          <IoNotificationsOutline className="text-xl" />
+          <IoNotificationsOutline className="text-xl text-default-600" />
         </Button>
         {/* dashboard toggle button */}
         <Tooltip 
@@ -136,7 +136,7 @@ export function RightSideIcons({ toggleDashboard, showDashboard }) {
             className={`bg-white/90 backdrop-blur-xl shadow-xl min-w-10 h-10 transition-transform ${showDashboard ? 'bg-opacity-100' : 'bg-opacity-75'}`}
             onClick={toggleDashboard}
           >
-            <IoGridOutline className="text-xl" />
+            <IoGridOutline className="text-xl text-default-600" />
           </Button>
         </Tooltip>
         {/* user icon */}
@@ -165,7 +165,7 @@ export function RightSideIcons({ toggleDashboard, showDashboard }) {
               }
             }}
           >
-            <IoPersonOutline className="text-xl" />
+            <IoPersonOutline className="text-xl text-default-600" />
           </Button>
         </Tooltip>
       </div>
@@ -181,7 +181,53 @@ export function SearchBarAndZoomControls({ toggleDashboard, showDashboard }) {
 
   // Mock data for suggestions - replace this with your actual data source
   const mockLocations = [
-    "Singapore",
+    "Ang Mo Kio",
+    "Bedok",
+    "Bishan",
+    "Boon Lay",
+    "Bukit Batok",
+    "Bukit Merah",
+    "Bukit Panjang",
+    "Bukit Timah",
+    "Central Water Catchment",
+    "Changi",
+    "Choa Chu Kang",
+    "Clementi",
+    "City",
+    "Geylang",
+    "Hougang",
+    "Jalan Bahar",
+    "Jurong East",
+    "Jurong Island",
+    "Jurong West",
+    "Kallang",
+    "Lim Chu Kang",
+    "Mandai",
+    "Marine Parade",
+    "Novena",
+    "Pasir Ris",
+    "Paya Lebar",
+    "Pioneer",
+    "Pulau Tekong",
+    "Pulau Ubin",
+    "Punggol",
+    "Queenstown",
+    "Seletar",
+    "Sembawang",
+    "Sengkang",
+    "Sentosa",
+    "Serangoon",
+    "Southern Islands",
+    "Sungei Kadut",
+    "Tampines",
+    "Tanglin",
+    "Tengah",
+    "Toa Payoh",
+    "Tuas",
+    "Western Islands",
+    "Western Water Catchment",
+    "Woodlands",
+    "Yishun"
   ];
 
   const handleSearch = () => {
@@ -237,67 +283,107 @@ export function SearchBarAndZoomControls({ toggleDashboard, showDashboard }) {
   };
 
   return (
-    <div
-      className="absolute top-2 md:top-4 left-1/2 -translate-x-1/2 z-[2000] w-full max-w-2xl px-2 sm:px-4"
-      style={{ position: 'fixed' }}
-    >
-      <div className="search-controls-container flex flex-nowrap gap-1 sm:gap-2 items-center rounded-full py-2 px-3">
-        <MapZoomControl />
-        <div className="relative flex-1">
-          <Input
-            value={searchQuery}
-            onValueChange={handleInputChange}
-            classNames={{
-              base: "w-full search-input-wrapper",
-              inputWrapper: "bg-transparent shadow-none hover:!bg-transparent h-11 focus-within:ring-2 focus-within:ring-blue-500",
-              input: "text-base px-4"
-            }}
-            radius="full"
-            placeholder="Search"
-            endContent={
-              <Button
-                isIconOnly
-                variant="light"
-                size="sm"
-                className="hover:bg-default-100"
-                onClick={handleSearch}
-              >
-                <SearchIcon />
-              </Button>
-            }
-            onKeyDown={(e) => {
-              if (e.key === 'Enter') {
-                handleSearch();
-              }
-            }}
-            variant="bordered"
-          />
-          {isOpen && suggestions.length > 0 && createPortal(
-            <div 
-              className="fixed bg-[#8392C8]/90 backdrop-blur-xl shadow-xl rounded-2xl max-h-60 overflow-auto z-[1000]"
-              style={{
-                width: document.querySelector('.search-input-wrapper')?.getBoundingClientRect().width,
-                top: document.querySelector('.search-input-wrapper')?.getBoundingClientRect().bottom + 8,
-                left: document.querySelector('.search-input-wrapper')?.getBoundingClientRect().left,
+    <>
+      <div
+        className="absolute top-2 md:top-4 left-1/2 -translate-x-1/2 z-[999] w-full max-w-2xl px-2 sm:px-4"
+        style={{ position: 'fixed' }}
+      >
+        <div className="search-controls-container flex flex-nowrap gap-1 sm:gap-2 items-center rounded-full py-2 px-3">
+          <MapZoomControl />
+          <div className="relative flex-1">
+            <Input
+              value={searchQuery}
+              onValueChange={handleInputChange}
+              classNames={{
+                base: "w-full search-input-wrapper",
+                inputWrapper: "bg-transparent shadow-none hover:!bg-transparent h-11 focus-within:ring-2 focus-within:ring-blue-500",
+                input: "text-base px-4"
               }}
-            >
-              {suggestions.map((suggestion, index) => (
-                <div
-                  key={index}
-                  className="px-4 py-2 hover:bg-[#95A3D3] cursor-pointer text-base text-white"
-                  onClick={() => handleSuggestionClick(suggestion)}
+              radius="full"
+              placeholder="Search"
+              endContent={
+                <Button
+                  isIconOnly
+                  variant="light"
+                  size="sm"
+                  className="hover:bg-default-100"
+                  onClick={handleSearch}
                 >
-                  {highlightText(suggestion, searchQuery)}
-                </div>
-              ))}
-            </div>,
-            document.body
-          )}
-        </div>
-        <div className="desktop-icons">
-          <RightSideIcons toggleDashboard={toggleDashboard} showDashboard={showDashboard} />
+                  <SearchIcon />
+                </Button>
+              }
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  handleSearch();
+                }
+              }}
+              variant="bordered"
+            />
+            {isOpen && suggestions.length > 0 && createPortal(
+              <div 
+                className="fixed bg-[#8392C8]/90 backdrop-blur-xl shadow-xl rounded-2xl max-h-60 overflow-auto z-[998]"
+                style={{
+                  width: document.querySelector('.search-input-wrapper')?.getBoundingClientRect().width,
+                  top: document.querySelector('.search-input-wrapper')?.getBoundingClientRect().bottom + 8,
+                  left: document.querySelector('.search-input-wrapper')?.getBoundingClientRect().left,
+                }}
+              >
+                {suggestions.map((suggestion, index) => (
+                  <div
+                    key={index}
+                    className="px-4 py-2 hover:bg-[#95A3D3] cursor-pointer text-base text-white"
+                    onClick={() => handleSuggestionClick(suggestion)}
+                  >
+                    {highlightText(suggestion, searchQuery)}
+                  </div>
+                ))}
+              </div>,
+              document.body
+            )}
+          </div>
+          <div className="hidden md:block">
+            <RightSideIcons toggleDashboard={toggleDashboard} showDashboard={showDashboard} />
+          </div>
         </div>
       </div>
-    </div>
+      {createPortal(
+        <div className="block md:hidden fixed bottom-4 right-4 z-[999]">
+          <div className="flex gap-2 bg-[#8392C8]/90 backdrop-blur-xl rounded-full py-2 px-4 shadow-xl">
+            <Button
+              isIconOnly
+              radius="full"
+              variant="light"
+              className="text-white min-w-10 h-10 shadow-lg hover:shadow-xl transition-shadow border border-white/20"
+            >
+              <IoNotificationsOutline className="text-xl" />
+            </Button>
+            <Button
+              isIconOnly
+              radius="full"
+              variant="light"
+              className="text-white min-w-10 h-10 shadow-lg hover:shadow-xl transition-shadow border border-white/20"
+              onClick={toggleDashboard}
+            >
+              <IoGridOutline className="text-xl" />
+            </Button>
+            <Button
+              isIconOnly
+              radius="full"
+              variant="light"
+              className="text-white min-w-10 h-10 shadow-lg hover:shadow-xl transition-shadow border border-white/20"
+              onClick={() => {
+                const map = window.leafletMap;
+                if (map) {
+                  map.setView(MAP_CONFIG.DEFAULT_CENTER, MAP_CONFIG.DEFAULT_ZOOM);
+                }
+              }}
+            >
+              <IoPersonOutline className="text-xl" />
+            </Button>
+          </div>
+        </div>,
+        document.body
+      )}
+    </>
   );
 }

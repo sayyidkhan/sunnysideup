@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { MainInsightsCards } from './cards/MainInsightsCards';
 import { MainInsightsChart } from './charts/MainInsightsChart';
-import { mark } from 'framer-motion/client';
+import { fetchSGMainForecast, fetchTempOnly, fetchHumidityAndRadiationOnly } from '../../api/weather/sg-forecast';
 
 export const baseStyles = {
   width: '100%',
@@ -20,7 +20,7 @@ const styles = {
   desktopContainer: {
     ...baseStyles,
     padding: '0 0.5rem',
-    transform: 'scale(0.8)',
+    transform: 'scale(0.78)',
     transformOrigin: 'top right',
     width: '100%'
   },
@@ -45,8 +45,39 @@ const styles = {
   }
 };
 
-export function MainInsightsDashboard({ show = true }) {
+export function MainInsightsDashboard({ show = true, selectedLocation }) {
   if (!show) return null;
+
+  const { locationName = 'Unknown Location', lat = 0, lng = 0, forecast = '' } = selectedLocation;
+  const [detailedWeatherData, setDetailedWeatherData] = useState({
+    humidityAndRadiationMetadata: null,
+    temperature: null
+  });
+
+  useEffect(() => {
+    const fetchWeatherData = async () => {
+      if (!lat || !lng) return;
+
+      try {
+        const mainData = await fetchSGMainForecast({
+          latitude: lat,
+          longitude: lng
+        });
+
+        const tempData = fetchTempOnly(mainData);
+        const humidityRadiationData = fetchHumidityAndRadiationOnly(mainData);
+
+        setDetailedWeatherData({
+          humidityAndRadiationMetadata: humidityRadiationData,
+          temperature: tempData
+        });
+      } catch (error) {
+        console.error('Error fetching weather data:', error);
+      }
+    };
+
+    fetchWeatherData();
+  }, [lat, lng]);
   
   return (
     <div className="w-full pointer-events-none">
@@ -59,7 +90,7 @@ export function MainInsightsDashboard({ show = true }) {
         </div>
         <div className="w-full max-w-[1200px] -mt-12">
           <div style={{...styles.desktopContainer}} className="pointer-events-auto">
-            <MainInsightsChart />
+            <MainInsightsChart detailedWeatherData={detailedWeatherData} />
           </div>
         </div>
       </div>
@@ -74,7 +105,7 @@ export function MainInsightsDashboard({ show = true }) {
         <div className="px-2 -mt-16">
           <div style={{...styles.mobileContainer}} className="pointer-events-auto">
             <div className="w-full flex justify-center">
-              <MainInsightsChart />
+              <MainInsightsChart detailedWeatherData={detailedWeatherData} />
             </div>
           </div>
         </div>

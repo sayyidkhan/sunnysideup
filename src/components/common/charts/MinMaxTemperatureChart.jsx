@@ -3,19 +3,32 @@ import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsi
 import { NoDataFallBackUIForCharts } from './NoDataFallBackUIForCharts';
 
 const dummyData = [
-  { time: '00:00', maxTemp: 28, minTemp: 24 },
-  { time: '02:40', maxTemp: 27, minTemp: 23 },
-  { time: '05:20', maxTemp: 26, minTemp: 22 },
-  { time: '08:00', maxTemp: 29, minTemp: 25 },
-  { time: '10:40', maxTemp: 32, minTemp: 27 },
-  { time: '13:20', maxTemp: 34, minTemp: 28 },
-  { time: '16:00', maxTemp: 33, minTemp: 27 },
-  { time: '18:40', maxTemp: 31, minTemp: 26 },
-  { time: '21:20', maxTemp: 29, minTemp: 25 },
-  { time: '23:59', maxTemp: 28, minTemp: 24 },
+  { date: '2024-01-01', min: 24, max: 32 },
+  { date: '2024-01-02', min: 23, max: 31 },
+  { date: '2024-01-03', min: 25, max: 33 },
+  { date: '2024-01-04', min: 22, max: 30 },
+  { date: '2024-01-05', min: 24, max: 31 },
+  { date: '2024-01-06', min: 23, max: 32 },
+  { date: '2024-01-07', min: 25, max: 34 },
 ];
 
-export function MinMaxTemperatureChart({ data }) {
+export function MinMaxTemperatureChart({ data, rotateXAxis, isMainInsights }) {
+  console.log('MinMaxTemperatureChart received data:', data);
+
+  // Check if data is valid
+  const isDataValid = data?.temp_forecast?.length > 0 && 
+    data.temp_forecast.every(item => 
+      typeof item.temperature_2m_min === 'number' && 
+      typeof item.temperature_2m_max === 'number'
+    );
+
+  if (!isDataValid) {
+    return <NoDataFallBackUIForCharts />;
+  }
+
+  // Check if we're in MainInsights by checking the data structure
+  const isMainInsightsLocal = data?.temp_forecast?.length > 0;
+
   const tooltipStyle = {
     contentStyle: {
       backgroundColor: 'rgba(0, 0, 0, 0.8)',
@@ -38,51 +51,88 @@ export function MinMaxTemperatureChart({ data }) {
     }
   };
 
-  if (!data || data.length === 0) {
-    return <NoDataFallBackUIForCharts />;
-  }
+  const legendStyle = {
+    color: '#FFFFFF',
+    '@media (min-width: 1280px)': {
+      marginTop: '2rem'
+    }
+  };
 
-  return <ResponsiveContainer width="100%" height="85%">
-    <AreaChart data={data} margin={{ top: 10, right: 0, left: -40, bottom: 10 }}>
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis
-        dataKey="time"
-        tick={{ fontSize: 12, fill: '#FFFFFF' }}
-        height={40}
-        stroke="#FFFFFF" />
-      <YAxis
-        unit="°C"
-        domain={[20, 40]}
-        tick={{ fontSize: 12, fill: '#FFFFFF' }}
-        width={85}
-        tickFormatter={(value) => value === 0 ? '0' : value}
-        stroke="#FFFFFF" />
-      <Tooltip
-        wrapperClassName="hidden md:block"
-        contentStyle={tooltipStyle.contentStyle}
-        itemStyle={tooltipStyle.itemStyle}
-        labelStyle={tooltipStyle.labelStyle}
-      />
-      <Legend 
-        verticalAlign="bottom"
-        height={30}
-      />
-      <Area
-        type="monotone"
-        dataKey="maxTemp"
-        stroke="#39FF14"
-        fill="#39FF14"
-        fillOpacity={0.6}
-        name="Max Temperature"
-        strokeWidth={2} />
-      <Area
-        type="monotone"
-        dataKey="minTemp"
-        stroke="#FF0000"
-        fill="#FF0000"
-        fillOpacity={0.6}
-        name="Min Temperature"
-        strokeWidth={2} />
-    </AreaChart>
-  </ResponsiveContainer>;
+  // If no data is provided, use dummy data
+  const chartData = data?.temp_forecast?.length > 0
+    ? data.temp_forecast.map(item => ({
+        date: item.date,
+        min: item.temperature_2m_min,
+        max: item.temperature_2m_max
+      }))
+    : dummyData;
+  
+  console.log('Final chartData:', chartData);
+
+  return (
+    <ResponsiveContainer width="100%" height={rotateXAxis ? "100%" : "85%"}>
+      <AreaChart data={chartData} margin={{ 
+        top: 5, 
+        right: 30, 
+        left: 20, 
+        bottom: 20 
+      }}>
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis
+          dataKey="date"
+          tick={{ 
+            fontSize: rotateXAxis ? 11 : 16, 
+            fill: '#FFFFFF', 
+            angle: rotateXAxis ? 0 : -20, 
+            textAnchor: rotateXAxis ? 'middle' : 'end' 
+          }}
+          tickLine={{ stroke: '#FFFFFF' }}
+          axisLine={{ stroke: '#FFFFFF' }}
+          tickFormatter={(value) => value.split('T')[0].replace(/-/g, '/')}
+          height={45}
+          dy={10}
+          interval={rotateXAxis ? 2 : 0}
+        />
+        <YAxis
+          tick={{ fontSize: 12, fill: '#FFFFFF' }}
+          tickLine={{ stroke: '#FFFFFF' }}
+          axisLine={{ stroke: '#FFFFFF' }}
+          label={{ value: 'Temperature (°C)', angle: -90, position: 'insideLeft', fill: '#FFFFFF', style: { textAnchor: 'middle' } }}
+        />
+        <Tooltip {...tooltipStyle} />
+        <Legend 
+          verticalAlign="bottom"
+          align="center"
+          wrapperStyle={{
+            color: '#FFFFFF',
+            position: 'relative',
+            top: rotateXAxis ? "-70px" : "-12.5px",
+            paddingTop: '0px'
+          }}
+          formatter={(value, entry) => {
+            const color = entry.dataKey === 'max' ? '#FFB6C1' : '#39FF14';
+            return <span style={{ color }}>{value}</span>;
+          }}
+        />
+        <Area
+          type="monotone"
+          dataKey="max"
+          stroke="#FF7F50"
+          fill="#FF7F50"
+          fillOpacity={0.3}
+          strokeWidth={2}
+          name="Max Temperature"
+        />
+        <Area
+          type="monotone"
+          dataKey="min"
+          stroke="#39FF14"
+          fill="#39FF14"
+          fillOpacity={0.3}
+          strokeWidth={2}
+          name="Min Temperature"
+        />
+      </AreaChart>
+    </ResponsiveContainer>
+  );
 }

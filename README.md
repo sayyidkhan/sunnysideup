@@ -20,16 +20,21 @@ There are several ways to run tests:
    npm test
    ```
 
-2. **Run a specific test file**
+2. **Run all weather API tests**
    ```bash
-   # Replace with your test file path
-   npm test src/api/locationAndTwoHourWeatherForecast.test.ts
+   npx jest src/api/weather
    ```
 
-3. **Run tests matching a pattern**
+3. **Run specific test files**
    ```bash
-   # Replace "pattern" with your test name
-   npm run test:pattern "should fetch weather data"
+   # Singapore 10-day forecast
+   npx jest src/api/weather/sg-forecast-singapore.test.ts
+   
+   # Ang Mo Kio 10-day forecast
+   npx jest src/api/weather/sg-forecast-angmokio.test.ts
+   
+   # Singapore 2-hour location forecast
+   npx jest src/api/weather/sg-location-singapore.test.ts
    ```
 
 4. **Run tests in watch mode**
@@ -42,27 +47,83 @@ There are several ways to run tests:
    - Press `t` to filter by a test name regex pattern
    - Press `q` to quit watch mode
 
+### Weather API Tests
+
+The project includes several test files for weather-related functionality:
+
+1. **10-Day Weather Forecast Tests**
+   - `sg-forecast-singapore.test.ts`: Tests Singapore's 10-day weather forecast
+   - `sg-forecast-angmokio.test.ts`: Tests Ang Mo Kio's 10-day weather forecast
+   
+   These tests verify:
+   - Temperature forecasts (min/max)
+   - Humidity levels
+   - Solar radiation data
+   - Location data accuracy
+   - Data structure and types
+
+2. **2-Hour Location Forecast Tests**
+   - `sg-location-singapore.test.ts`: Tests the 2-hour weather forecast for all Singapore locations
+   
+   This test verifies:
+   - Weather data for 47 locations across Singapore
+   - Location coordinates
+   - Current weather conditions
+   - Forecast timestamps and validity periods
+
 ### Writing Tests
 
 Test files should be created next to the file they are testing with a `.test.ts` or `.test.tsx` extension. For example:
 ```
 src/
   api/
-    locationAndTwoHourWeatherForecast.ts
-    locationAndTwoHourWeatherForecast.test.ts
+    weather/
+      sg-forecast.ts
+      sg-forecast-singapore.test.ts
+      sg-forecast-angmokio.test.ts
+      sg-location.ts
+      sg-location-singapore.test.ts
 ```
 
 Example test structure:
 ```typescript
-describe('Feature or Component Name', () => {
-  it('should do something specific', () => {
-    // Your test code
+describe('Feature Name', () => {
+  it('TEST DESCRIPTION', async () => {
+    // First fetch the data
+    const data = await fetchSomeData();
+    
+    // Test data structure with example JSON
+    //   "exampleField": {
+    //     "key": "value"
+    //   }
+    expect(data.exampleField).toBeDefined();
+    
+    // Test specific values
+    expect(data.exampleField.key).toBe('value');
+    
+    // Log sample data
+    console.log('Sample Data:', JSON.stringify(data, null, 2));
   });
 });
 ```
 
-To run a single test case during development, you can temporarily add `.only`:
-```typescript
-it.only('should do something specific', () => {
-  // Only this test will run
-});
+### Best Practices
+
+1. **Comment Structure**
+   - Include example JSON structures in comments before testing them
+   - Use clear section headers (e.g., "Test location structure", "Test metadata")
+   - Add helpful console logs for debugging
+
+2. **API Testing**
+   - Test both successful and error cases
+   - Verify data types and structures
+   - Check for required fields
+   - Test with different parameters when applicable
+
+3. **Timeouts**
+   - Add longer timeouts for API calls if needed:
+     ```typescript
+     it('TEST NAME', async () => {
+       // ... test code
+     }, 10000); // 10 second timeout
+     ```

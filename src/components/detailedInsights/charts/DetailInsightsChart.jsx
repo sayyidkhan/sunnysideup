@@ -1,9 +1,12 @@
 import React from 'react';
-import {Tabs, Tab, Card, CardBody} from "@nextui-org/react";
+import { Card, CardBody, Tab, Tabs } from '@nextui-org/react';
 import { HumidityAndTemperatureChart } from '../../common/charts/HumidityAndTemperatureChart';
 import { MinMaxTemperatureChart } from '../../common/charts/MinMaxTemperatureChart';
+import { useMediaQuery } from '@react-hook/media-query';
 
-function DetailInsightsTabs() {
+function DetailInsightsTabs({ detailedWeatherData }) {
+  const isMobile = useMediaQuery('(max-width: 768px)');
+
   return (
     <div className="flex flex-col w-[120%] -ml-[10%] md:w-full md:ml-0 h-full">
       <Tabs 
@@ -20,14 +23,18 @@ function DetailInsightsTabs() {
         <Tab key="humidity_and_radiation" title="Humidity and Radiation">
           <Card className="bg-transparent shadow-none">
             <CardBody className="h-[380px] md:h-[400px] px-2 md:px-8 pt-1 pb-2 md:pb-4 w-[105%] -ml-[2.5%] md:w-full md:ml-0">
-              <HumidityAndTemperatureChart />
+              <div className="w-full h-full transform scale-[0.9] md:scale-[0.85] lg:scale-100 origin-top">
+                <HumidityAndTemperatureChart data={detailedWeatherData?.humidityAndRadiationMetadata} rotateXAxis={isMobile} />
+              </div>
             </CardBody>
           </Card>  
         </Tab>
         <Tab key="min_max_temperature" title="Min/Max Temperature">
           <Card className="bg-transparent shadow-none">
             <CardBody className="h-[380px] md:h-[400px] px-2 md:px-8 pt-1 pb-2 md:pb-4 w-[105%] -ml-[2.5%] md:w-full md:ml-0">
-              <MinMaxTemperatureChart />
+              <div className="w-full h-full transform scale-[0.9] md:scale-[0.85] lg:scale-100 origin-top">
+                <MinMaxTemperatureChart data={detailedWeatherData?.temperature} rotateXAxis={isMobile} />
+              </div>
             </CardBody>
           </Card>  
         </Tab>
@@ -36,10 +43,10 @@ function DetailInsightsTabs() {
   );
 }
 
-export function DetailInsightsChart() {
+export function DetailInsightsChart({ weatherData: detailedWeatherData }) {
   return (
     <div className="w-full h-full">
-      <DetailInsightsTabs />
+      <DetailInsightsTabs detailedWeatherData={detailedWeatherData} />
     </div>
   );
 }
