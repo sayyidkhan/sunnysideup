@@ -1,6 +1,6 @@
 import React from 'react';
 import { DetailInsightsCard } from './DetailInsightsCard';
-import { getTodayAverageMegaWatts } from '../../util/radiationCalculator';
+import { getTodayAverageMegaWatts } from '../../../utils/radiationCalculator';
 
 export function DetailGenerationCard({ generation, radiation }) {
 
