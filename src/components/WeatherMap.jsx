@@ -124,7 +124,6 @@ export default function WeatherMap() {
                 };
                 if (locationData) {
                   setSelectedLocation(locationData);
-                  setShowDashboard(false);
                   setShowSiteDetails(true);
                 }
               },

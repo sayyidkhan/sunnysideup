@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { fetchSGHourlyRadiationForecast } from '../../../api/weather/sg-forecast-hourly';
-import { getTodayAverageMegaWatts, formatDateTime } from '../../util/radiationCalculator';
+import { getTodayAverageMegaWatts, formatDateTime } from '../../../utils/radiationCalculator';
 
 export function MainInsightsCards() {
   const [radiationData, setRadiationData] = useState(null);
