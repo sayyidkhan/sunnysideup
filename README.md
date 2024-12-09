@@ -134,6 +134,7 @@ Here's a quick look at what SunnySideUp offers across different devices:
 #### UI & Styling
 - **NextUI** - Modern, fast and beautiful React UI library built with TailwindCSS
 - **TailwindCSS** - Utility-first CSS framework for rapid UI development
+- **React Icons** - Include popular icon packs as React components
 
 #### Maps & Visualization
 - **React Leaflet** - React components for interactive Singapore map visualization
@@ -259,66 +260,6 @@ src/
 - `.prettierrc`: Code formatting rules
 - `vercel.json`: Vercel deployment and routing configuration
 
-### Performance Optimizations
-
-#### Code Splitting and Lazy Loading
-The application implements code splitting and lazy loading to optimize initial load times and improve performance:
-
-```javascript
-// Example: MiniMap component lazy loading in DetailLocationCard.jsx
-const MiniMap = lazy(() => 
-  new Promise(resolve => {
-    setTimeout(() => {
-      resolve(import('../../common/minimap/MiniMap').then(module => ({
-        default: module.MiniMap
-      })));
-    }, 200);
-  })
-);
-```
-
-Key implementations:
-- **Map Components**: The MiniMap component is lazy loaded with a 200ms delay for smooth transitions
-- **Chart Components**: Heavy chart components are loaded on demand
-- **Dashboard Views**: Detailed insights are loaded only when a location is selected
-
-Benefits:
-- Reduced initial bundle size
-- Faster initial page load
-- Better resource utilization
-- Smooth loading transitions with fallback UI
-
-#### Additional Optimizations
-- **Tree Shaking**: Enabled through Vite configuration
-- **Bundle Size**: Optimized through dynamic imports
-- **Image Loading**: Progressive loading for map tiles
-- **API Caching**: Weather data caching for improved performance
-
-## Available APIs
-
-All forecast data includes predictions from the current date plus the next 10 days, providing comprehensive coverage for weather planning and analysis. The hourly radiation data focuses on the current day's measurements and predictions.
-
-```typescript
-// Weather Data
-const data = await fetchSGMainDailyForecast({
-  latitude?: number,    // Optional: defaults to Singapore
-  longitude?: number,   // Optional: defaults to Singapore
-  timezone?: string    // Optional: defaults to 'Asia/Singapore'
-});
-
-// Data Processing Functions
-// Components using: MainInsightsChart, DetailInsightsChart
-const tempData = fetchDailyTemp(data);                    // Get 10-day temperature forecast
-
-// Components using: MainInsightsChart, DetailInsightsChart
-const humidityData = fetchDailyHumidityAndRadiation(data);  // Get humidity and radiation data
-
-// Components using: MainInsightsCards
-const hourlyData = await fetchSGHourlyRadiationForecast();  // Get hourly radiation updates
-
-// Components using: WeatherMap
-const locationData = await fetchDailyLocationAndForecast();  // Get 2-hour forecast for 47 locations
-
 ## Testing
 
 Jest is used for testing. Test files are located alongside their corresponding implementation files with `.test.ts` or `.test.tsx` extensions.
@@ -396,3 +337,30 @@ describe('Feature Name', () => {
     console.log('Sample Data:', JSON.stringify(data, null, 2));
   });
 });
+
+```
+
+## Available APIs
+
+All forecast data includes predictions from the current date plus the next 10 days, providing comprehensive coverage for weather planning and analysis. The hourly radiation data focuses on the current day's measurements and predictions.
+
+```typescript
+// Weather Data
+const data = await fetchSGMainDailyForecast({
+  latitude?: number,    // Optional: defaults to Singapore
+  longitude?: number,   // Optional: defaults to Singapore
+  timezone?: string    // Optional: defaults to 'Asia/Singapore'
+});
+
+// Data Processing Functions
+// Components using: MainInsightsChart, DetailInsightsChart
+const tempData = fetchDailyTemp(data);                    // Get 10-day temperature forecast
+
+// Components using: MainInsightsChart, DetailInsightsChart
+const humidityData = fetchDailyHumidityAndRadiation(data);  // Get humidity and radiation data
+
+// Components using: MainInsightsCards
+const hourlyData = await fetchSGHourlyRadiationForecast();  // Get hourly radiation updates
+
+// Components using: WeatherMap
+const locationData = await fetchDailyLocationAndForecast();  // Get 2-hour forecast for 47 locations
