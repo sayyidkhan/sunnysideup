@@ -1,5 +1,8 @@
 # SunnySideUp - Singapore Weather Dashboard
 
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://sunnysideup-one.vercel.app)
+[![GitHub](https://img.shields.io/badge/GitHub-Repository-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/nasrulhaqkhan/sunnysideup)
+
 A comprehensive weather monitoring application for Singapore that provides detailed insights into:
 - 🌡️ Temperature variations and forecasts
 - 💧 Humidity levels across different regions
@@ -9,22 +12,118 @@ A comprehensive weather monitoring application for Singapore that provides detai
 Built with modern web technologies to deliver real-time weather data visualization and forecasting.
 
 ## Table of Contents
-1. [Tech Stack](#tech-stack)
+1. [Key Features](#key-features)
+   - [Search Bar Features: Interactive Map Controls](#search-bar-features-interactive-map-controls)
+   - [Weather Forecast Charts](#weather-forecast-charts)
+   - [Performance Metrics](#performance-metrics)
+2. [Application Preview](#application-preview)
+   - [Main Dashboard](#main-dashboard)
+   - [Detailed Weather Insights](#detailed-weather-insights)
+   - [Collapsed Dashboard View](#collapsed-dashboard-view)
+   - [Location Search](#location-search)
+3. [Tech Stack](#tech-stack)
    - [Core Technologies](#core-technologies)
    - [UI & Styling](#ui--styling)
    - [Maps & Visualization](#maps--visualization)
    - [Code Quality](#code-quality)
-2. [Environment Setup](#environment-setup)
-3. [How to Run and Get Started with the App](#how-to-run-and-get-started-with-the-app)
-4. [Project Structure](#project-structure)
-5. [Available APIs](#available-apis)
-6. [Features](#features)
-7. [Testing](#testing)
+4. [Environment Setup](#environment-setup)
+5. [How to Run and Get Started with the App](#how-to-run-and-get-started-with-the-app)
+6. [Project Structure](#project-structure)
+7. [Available APIs](#available-apis)
+8. [Testing](#testing)
    - [Running Tests](#running-tests)
    - [Weather API Tests](#weather-api-tests)
    - [Test Structure](#test-structure)
 
-### Tech Stack
+## Key Features
+
+### Search Bar Features: Interactive Map Controls
+- 🔍 **Zoom In**: Magnify specific areas on the map for detailed view
+- 🔎 **Zoom Out**: Expand view to see larger map area
+- 🔍 **Searchbar**: Quick location search with intelligent autocomplete suggestions
+- 🔔 **Notifications**: Ready for future implementation of weather alerts
+- 📊 **Dashboard**: Toggle to open/close the weather insights dashboard
+- 👤 **User**: Reset view to Singapore (default location) with centered red marker and reset dashboard
+
+### Weather Forecast Charts
+- 📈 **Temperature Forecast**: Daily temperature trends and predictions for the next 10 days
+- 💧 **Humidity Analysis**: Comprehensive humidity data visualization from today to 10 days ahead
+- ☀️ **Solar Radiation Tracking**: Daily solar radiation levels and forecasts for the next 10 days
+
+### Performance Metrics
+<img src="docs/img/asset-and-today-performance-card-web-min.jpg" width="600" alt="Assets and Today's Performance Cards"/>
+
+- 🌞 **Total Radiation (Assets)**
+  - Displays cumulative solar radiation collected
+  - Shows maximum radiation value per day (MWp - Peak Megawatt)
+- ⚡ **Today's Performance**
+  - Average hourly radiation (Total daily radiation/24 hours in MWh)
+  - Real-time current hour radiation value (MW)
+- 🕒 **Last Updated**: Timestamp showing most recent data refresh
+
+
+## Application Preview
+Here's a quick look at what SunnySideUp offers across different devices:
+
+### Main Dashboard
+<details>
+<summary>View Screenshots</summary>
+
+#### Desktop View
+<img src="docs/img/main-dashboard-web-min.jpg" width="600" alt="Main Dashboard Web View"/>
+
+#### Tablet View
+<img src="docs/img/main-dashboard-tablet-min.jpg" width="400" alt="Main Dashboard Tablet View"/>
+
+#### Mobile View
+<img src="docs/img/main-dashboard-mobile-min.jpg" width="300" alt="Main Dashboard Mobile View"/>
+</details>
+
+### Detailed Weather Insights
+<details>
+<summary>View Screenshots</summary>
+
+#### Desktop View
+<img src="docs/img/detailed-dashboard-web-min.jpg" width="600" alt="Detailed Dashboard Web View"/>
+
+#### Tablet View
+<img src="docs/img/detailed-dashboard-tablet-min.jpg" width="400" alt="Detailed Dashboard Tablet View"/>
+
+#### Mobile Views
+<img src="docs/img/detailed-dashboard-mobile-view1-min.jpg" width="300" alt="Detailed Dashboard Mobile View 1"/>
+<img src="docs/img/detailed-dashboard-mobile-view2-min.jpg" width="300" alt="Detailed Dashboard Mobile View 2"/>
+<img src="docs/img/detailed-dashboard-mobile-view3-min.jpg" width="300" alt="Detailed Dashboard Mobile View 3"/>
+</details>
+
+### Collapsed Dashboard View
+<details>
+<summary>View Screenshots</summary>
+
+#### Desktop View
+<img src="docs/img/close-dashboard-web-min.jpg" width="600" alt="Collapsed Dashboard Web View"/>
+
+#### Tablet View
+<img src="docs/img/close-dashboard-tablet-min.jpg" width="400" alt="Collapsed Dashboard Tablet View"/>
+
+#### Mobile View
+<img src="docs/img/close-dashboard-mobile-min.jpg" width="300" alt="Collapsed Dashboard Mobile View"/>
+</details>
+
+### Location Search
+<details>
+<summary>View Screenshots</summary>
+
+#### Desktop View
+<img src="docs/img/searchbar-web-min.jpg" width="600" alt="Search Bar Web View"/>
+
+#### Tablet View
+<img src="docs/img/searchbar-tablet-min.jpg" width="400" alt="Search Bar Tablet View"/>
+
+#### Mobile View
+<img src="docs/img/searchbar-mobile.jpg" width="300" alt="Search Bar Mobile View"/>
+</details>
+
+## Tech Stack
 
 #### Core Technologies
 - **React** - A JavaScript library for building user interfaces
@@ -219,32 +318,6 @@ const hourlyData = await fetchSGHourlyRadiationForecast();  // Get hourly radiat
 
 // Components using: WeatherMap
 const locationData = await fetchDailyLocationAndForecast();  // Get 2-hour forecast for 47 locations
-
-## Features
-
-### Weather Dashboard
-- **Interactive Map**: Singapore-centric map with location markers
-- **Real-time Updates**: Hourly radiation and weather updates
-- **Location Search**: Search and zoom to specific locations
-- **Responsive Design**: Optimized for desktop and mobile devices
-
-### Data Visualization
-- **Temperature Charts**: Min/max temperature trends over time
-- **Humidity Analysis**: Detailed humidity level tracking
-- **Radiation Monitoring**: Solar radiation measurements and forecasts
-- **Custom Charts**: Interactive charts with zoom and tooltip features
-
-### Dashboard Views
-- **Main Insights**: Quick overview of current weather conditions
-- **Detailed Analysis**: In-depth weather data for selected locations
-- **Performance Metrics**: Asset performance and efficiency tracking
-- **Location Details**: Specific weather conditions for each location
-
-### Technical Features
-- **Progressive Web App**: Installable on mobile devices
-- **Offline Support**: Basic functionality works without internet
-- **Real-time Updates**: Live data updates without page refresh
-- **Responsive Layout**: Adapts to different screen sizes
 
 ## Testing
 
