@@ -1,12 +1,8 @@
 import React from 'react';
 import { DetailInsightsCard } from './DetailInsightsCard';
+import { getTodayAverageMegaWatts } from '../../util/radiationCalculator';
 
 export function DetailGenerationCard({ generation, radiation }) {
-
-  function getTodayAverageMegaWatts(totalMegaWatts) {
-    const averageMegaWatts = Number((totalMegaWatts / 24).toFixed(2));
-    return averageMegaWatts;
-  }
 
   return (
     <DetailInsightsCard title="Today's Generation" className="h-full">
