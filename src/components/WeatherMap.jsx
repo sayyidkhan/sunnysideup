@@ -4,7 +4,7 @@ import { MAP_CONFIG } from '../constants/data';
 import { SearchBarAndZoomControls } from './common/SearchBar';
 import { MainInsightsDashboard } from './mainInsights/MainInsightsDashboard';
 import { DetailInsightsDashboard } from './detailedInsights/DetailInsightsDashboard';
-import { fetchLocationAndForecast } from '../api/weather/sg-location';
+import { fetchDailyLocationAndForecast } from '../api/weather/sg-forecast-daily-location';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
@@ -44,7 +44,7 @@ export default function WeatherMap() {
   useEffect(() => {
     const fetchLocations = async () => {
       try {
-        const weatherData = await fetchLocationAndForecast();
+        const weatherData = await fetchDailyLocationAndForecast();
         setLocations(weatherData.locations);
         setSingaporeForecast(weatherData.singaporeForecast);
       } catch (error) {
@@ -64,7 +64,7 @@ export default function WeatherMap() {
       <MapContainer 
         center={MAP_CONFIG.DEFAULT_CENTER}
         zoom={MAP_CONFIG.DEFAULT_ZOOM}
-        style={{ height: "100vh", width: "100%", zIndex: 0 }}
+        style={{ height: "100vh", width: "100%", zIndex: 0, background: "#13151C" }}
         attributionControl={false}
         zoomControl={false}
         className="md:pt-0 pt-4"
@@ -72,7 +72,12 @@ export default function WeatherMap() {
           window.leafletMap = mapInstance;
         }}
       >
-        <SearchBarAndZoomControls toggleDashboard={toggleDashboard} showDashboard={showDashboard} />
+        <SearchBarAndZoomControls 
+          toggleDashboard={toggleDashboard} 
+          showDashboard={showDashboard} 
+          setShowSiteDetails={setShowSiteDetails}
+          setSelectedLocation={setSelectedLocation}
+        />
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

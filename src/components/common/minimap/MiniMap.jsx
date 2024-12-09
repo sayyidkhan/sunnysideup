@@ -1,7 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Tooltip, useMap } from 'react-leaflet';
 import { LoadingGlobe } from './LoadingGlobe';
+import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+
+// Fix Leaflet marker icon issue
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
+  iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+});
 
 // This component will handle the loading state
 function MapLoadingHandler({ onLoad }) {
@@ -21,7 +30,8 @@ function MapLoadingHandler({ onLoad }) {
 export function MiniMap({ location }) {
   const [isMapReady, setIsMapReady] = useState(false);
   const [shouldShowMap, setShouldShowMap] = useState(false);
-  const position = [location?.lat || 0, location?.lng || 0];
+  const [error, setError] = useState(null);
+  const position = [location?.lat || 1.3521, location?.lng || 103.8198]; // Default to Singapore coordinates
 
   const handleMapLoad = React.useCallback(() => {
     setIsMapReady(true);
@@ -35,6 +45,18 @@ export function MiniMap({ location }) {
 
     return () => clearTimeout(timer);
   }, []);
+
+  // Error handling
+  if (error) {
+    return (
+      <div className="h-full w-full flex items-center justify-center bg-gray-800 rounded-xl">
+        <div className="text-white text-center p-4">
+          <p>Unable to load map</p>
+          <p className="text-sm text-gray-400">{error}</p>
+        </div>
+      </div>
+    );
+  }
   
   // Show loading state for first 2 seconds or until map is ready
   if (!shouldShowMap && !isMapReady) {
@@ -56,6 +78,8 @@ export function MiniMap({ location }) {
         <MapLoadingHandler onLoad={handleMapLoad} />
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          onError={(e) => setError('Failed to load map tiles')}
         />
         <Marker position={position}>
           <Tooltip 
@@ -64,7 +88,7 @@ export function MiniMap({ location }) {
             opacity={1}
             permanent
           >
-            <div className="font-semibold">{location?.locationName}</div>
+            <div className="font-semibold">{location?.locationName || 'Location'}</div>
             <div className="text-sm">{location?.forecast || ''}</div>
           </Tooltip>
         </Marker>

@@ -4,7 +4,7 @@ import { DetailPerformanceCard } from '../cards/DetailPerformanceCard';
 import { DetailLocationCard } from '../cards/DetailLocationCard';
 import { DetailGenerationCard } from '../cards/DetailGenerationCard';
 import { DetailInsightsChart } from '../charts/DetailInsightsChart';
-import { fetchSGMainForecast, fetchHumidityAndRadiationOnly, fetchTempOnly } from '../../../api/weather/sg-forecast';
+import { fetchSGMainDailyForecast, fetchDailyHumidityAndRadiation, fetchDailyTemp } from '../../../api/weather/sg-forecast-daily';
 
 export function InverterEfficiencyGrid({ data }) {
   const { locationName, lat, lng, forecast } = data;
@@ -18,13 +18,13 @@ export function InverterEfficiencyGrid({ data }) {
       if (!lat || !lng) return;
 
       try {
-        const mainData = await fetchSGMainForecast({
+        const mainData = await fetchSGMainDailyForecast({
           latitude: lat,
           longitude: lng
         });
 
-        const tempData = fetchTempOnly(mainData);
-        const humidityRadiationData = fetchHumidityAndRadiationOnly(mainData);
+        const tempData = fetchDailyTemp(mainData);
+        const humidityRadiationData = fetchDailyHumidityAndRadiation(mainData);
 
         setDetailedWeatherData({
           humidityAndRadiationMetadata: humidityRadiationData,

@@ -1,13 +1,14 @@
-import { fetchSGMainForecast, fetchTempOnly, fetchHumidityAndRadiationOnly } from './sg-forecast';
+import { fetchSGMainDailyForecast, fetchDailyTemp, fetchDailyHumidityAndRadiation } from './sg-forecast-daily';
 
 describe('Singapore Temperature Forecast', () => {
   it('TEST TEMP FORECAST', async () => {
     // First fetch all weather data
-    const mainData = await fetchSGMainForecast();
+    const mainData = await fetchSGMainDailyForecast();
     expect(mainData).toBeDefined();
+    expect(mainData.hourly).toBeDefined();
     
     // Then extract temperature data
-    const tempData = fetchTempOnly(mainData);
+    const tempData = fetchDailyTemp(mainData);
     
     // Test location structure
     //   "location": {
@@ -69,11 +70,12 @@ describe('Singapore Temperature Forecast', () => {
 describe('Singapore Humidity and Radiation', () => {
   it('TEST HUMIDITY AND RADIATION', async () => {
     // First fetch all weather data
-    const mainData = await fetchSGMainForecast();
+    const mainData = await fetchSGMainDailyForecast();
     expect(mainData).toBeDefined();
+    expect(mainData.hourly).toBeDefined();
     
     // Then extract humidity and radiation data
-    const humidityRadiation = fetchHumidityAndRadiationOnly(mainData);
+    const humidityRadiation = fetchDailyHumidityAndRadiation(mainData);
 
     // Test location structure
     //   "location": {

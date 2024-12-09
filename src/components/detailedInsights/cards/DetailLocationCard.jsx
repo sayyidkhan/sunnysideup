@@ -1,7 +1,7 @@
 import React, { Suspense, lazy } from 'react';
 import { DetailInsightsCard } from './DetailInsightsCard';
 import { BiWorld } from 'react-icons/bi';
-import { LoadingGlobe } from '../../minimap/LoadingGlobe';
+import { LoadingGlobe } from '../../common/minimap/LoadingGlobe';
 
 /**
  * Lazy load the MiniMap component with a controlled loading sequence:
@@ -23,7 +23,7 @@ const MiniMap = lazy(() =>
   new Promise(resolve => {
     // Add a small delay to ensure smooth loading transition
     setTimeout(() => {
-      resolve(import('../../minimap/MiniMap').then(module => ({
+      resolve(import('../../common/minimap/MiniMap').then(module => ({
         default: module.MiniMap
       })));
     }, 200);

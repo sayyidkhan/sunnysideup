@@ -1,18 +1,20 @@
-import { fetchSGMainForecast, fetchTempOnly, fetchHumidityAndRadiationOnly } from './sg-forecast';
+import { fetchSGMainDailyForecast, fetchDailyTemp, fetchDailyHumidityAndRadiation } from './sg-forecast-daily';
 
 const ANGMOKIO_PARAMS = {
   latitude: 1.375,
-  longitude: 103.839,
+  longitude: 103.8,
+  timezone: 'Asia/Singapore',
 };
 
 describe('Ang Mo Kio Temperature Forecast', () => {
-  it('TEST AMK TEMP FORECAST', async () => {
+  it('TEST TEMP FORECAST', async () => {
     // First fetch all weather data
-    const mainData = await fetchSGMainForecast(ANGMOKIO_PARAMS);
+    const mainData = await fetchSGMainDailyForecast(ANGMOKIO_PARAMS);
     expect(mainData).toBeDefined();
+    expect(mainData.hourly).toBeDefined();
     
     // Then extract temperature data
-    const tempData = fetchTempOnly(mainData);
+    const tempData = fetchDailyTemp(mainData);
     
     // Test location structure
     //   "location": {
@@ -74,13 +76,14 @@ describe('Ang Mo Kio Temperature Forecast', () => {
 });
 
 describe('Ang Mo Kio Humidity and Radiation', () => {
-  it('TEST AMK HUMIDITY AND RADIATION', async () => {
+  it('TEST HUMIDITY AND RADIATION', async () => {
     // First fetch all weather data
-    const mainData = await fetchSGMainForecast(ANGMOKIO_PARAMS);
+    const mainData = await fetchSGMainDailyForecast(ANGMOKIO_PARAMS);
     expect(mainData).toBeDefined();
+    expect(mainData.hourly).toBeDefined();
     
     // Then extract humidity and radiation data
-    const humidityRadiation = fetchHumidityAndRadiationOnly(mainData);
+    const humidityRadiation = fetchDailyHumidityAndRadiation(mainData);
 
     // Test location structure
     //   "location": {

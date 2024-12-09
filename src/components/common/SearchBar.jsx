@@ -173,7 +173,7 @@ export function RightSideIcons({ toggleDashboard, showDashboard }) {
   );
 }
 
-export function SearchBarAndZoomControls({ toggleDashboard, showDashboard }) {
+export function SearchBarAndZoomControls({ toggleDashboard, showDashboard, setShowSiteDetails, setSelectedLocation }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
@@ -233,7 +233,27 @@ export function SearchBarAndZoomControls({ toggleDashboard, showDashboard }) {
   const handleSearch = () => {
     if (searchQuery.trim()) {
       setIsOpen(false);
-      // Here you can add your search logic
+      // Find the matching location from mockLocations
+      const selectedLocation = mockLocations.find(
+        location => location.toLowerCase() === searchQuery.toLowerCase()
+      );
+      
+      if (selectedLocation) {
+        // Create a location object similar to what's used in markers
+        const locationData = {
+          locationName: selectedLocation,
+          lat: MAP_CONFIG.DEFAULT_CENTER[0], // Using default center for now
+          lng: MAP_CONFIG.DEFAULT_CENTER[1], // Using default center for now
+        };
+        
+        // Update selected location and show details
+        setSelectedLocation(locationData);
+        setShowSiteDetails(true);
+        // Clear search after successful search
+        setSearchQuery("");
+      } else {
+        // Removed toast notification code
+      }
     }
   };
 
@@ -275,10 +295,21 @@ export function SearchBarAndZoomControls({ toggleDashboard, showDashboard }) {
   };
 
   const handleSuggestionClick = (suggestion) => {
-    setSearchQuery(suggestion);
+    // Create a location object similar to what's used in markers
+    const locationData = {
+      locationName: suggestion,
+      lat: MAP_CONFIG.DEFAULT_CENTER[0], // Using default center for now
+      lng: MAP_CONFIG.DEFAULT_CENTER[1], // Using default center for now
+    };
+    
+    // Update selected location and show details
+    setSelectedLocation(locationData);
+    setShowSiteDetails(true);
+    
+    // Clear the search field and suggestions
+    setSearchQuery("");
     setSuggestions([]);
     setIsOpen(false);
-    handleSearch();
   };
 
   return (

@@ -1,9 +1,9 @@
-import { fetchLocationAndForecast } from './sg-location';
+import { fetchDailyLocationAndForecast } from './sg-forecast-daily-location';
 
 describe('Singapore 2-Hour Weather Forecast', () => {
   it('TEST LOCATION AND FORECAST', async () => {
     // First fetch the weather data
-    const weatherData = await fetchLocationAndForecast();
+    const weatherData = await fetchDailyLocationAndForecast();
     expect(weatherData).toBeDefined();
     
     // Test location structure
