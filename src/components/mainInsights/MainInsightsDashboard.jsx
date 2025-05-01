@@ -56,14 +56,15 @@ export function MainInsightsDashboard({ show = true, selectedLocation }) {
 
   useEffect(() => {
     const fetchWeatherData = async () => {
-      if (!lat || !lng) return;
+      if (!lat || !lng) {
+        return;
+      }
 
       try {
         const mainData = await fetchSGMainDailyForecast({
           latitude: lat,
           longitude: lng
         });
-
         const tempData = fetchDailyTemp(mainData);
         const humidityRadiationData = fetchDailyHumidityAndRadiation(mainData);
 
