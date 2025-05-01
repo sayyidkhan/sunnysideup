@@ -93,8 +93,8 @@ export const fetchSGMainDailyForecast = async (params: ForecastParams = {}): Pro
         latitude,
         longitude,
         timezone,
-        daily: ['temperature_2m_max', 'temperature_2m_min'],
-        hourly: ['relativehumidity_2m', 'direct_radiation', 'temperature_2m'],
+        daily: ['temperature_2m_max', 'temperature_2m_min'].join(','),
+        hourly: ['relativehumidity_2m', 'direct_radiation', 'temperature_2m'].join(','),
         forecast_days: 10,
       },
     });

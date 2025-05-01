@@ -55,9 +55,9 @@ export const fetchSGHourlyRadiationForecast = async (): Promise<RadiationRespons
     const currentHour = new Date(sgDateTime).getHours();
     
     // For debugging
-    console.log('API Response first few times:', time.slice(0, 5));
-    console.log('Current hour (0-23):', currentHour);
-    console.log('Total hours in response:', time.length);
+    // console.log('API Response first few times:', time.slice(0, 5));
+    // console.log('Current hour (0-23):', currentHour);
+    // console.log('Total hours in response:', time.length);
 
     // Format as HH:00 (00:00 to 23:00)
     const formattedTime = currentHour.toString().padStart(2, '0') + ':00';
