@@ -34,6 +34,10 @@ Built with modern web technologies to deliver real-time weather data visualizati
    - [Running Tests](#running-tests)
    - [Weather API Tests](#weather-api-tests)
    - [Test Structure](#test-structure)
+9. [Presentations](#presentations)
+   - [Getting Started](#getting-started)
+   - [Sample Presentation](#sample-presentation)
+   - [Features](#features)
 
 ## Key Features
 
@@ -339,6 +343,43 @@ describe('Feature Name', () => {
 });
 
 ```
+
+## Presentations
+
+This project uses [Marp](https://marp.app/) for creating Markdown-based presentations. All presentation files are stored in `/docs/presentation/`.
+
+### Getting Started
+
+1. Install dependencies:
+   ```bash
+   npm install --save-dev @marp-team/marp-cli @marp-team/marp-core
+   ```
+
+2. Create `.md` files in `/docs/presentation/` using Marp syntax
+
+3. Run presentations:
+   ```bash
+   # Convert to HTML
+   npx marp docs/presentation/your-file.md -o output.html
+   
+   # Live preview
+   npx marp docs/presentation/your-file.md --preview
+   
+   # Start web server (serves on http://localhost:8080)
+   npx marp docs/presentation/ --server
+   ```
+
+### Sample Presentation
+We've included a `hello-world.md` starter file with:
+- Basic slide structure
+- Marp directives
+- Example content
+
+### Features
+- Write slides in Markdown
+- Supports themes, code blocks, and images
+- Export to HTML, PDF, and PPTX
+- Built-in web server for development
 
 ## Available APIs
 
